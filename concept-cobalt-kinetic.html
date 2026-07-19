@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smiling Panda — Cobalt Kinetic concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#F2F0EA;
+  --ink:#12121A;
+  --cobalt:#2038EE;
+  --cobalt-d:#1626C9;
+  --orange:#FF5C1F;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Bricolage Grotesque',system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.55}
+.mono{font-family:'Space Mono',monospace}
+a{color:inherit;text-decoration:none}
+svg,img{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:var(--cobalt);color:var(--bone)}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.wrap{max-width:1240px;margin:auto;padding:0 28px}
+
+/* cursor dot */
+.dot{position:fixed;width:14px;height:14px;border-radius:50%;background:var(--orange);pointer-events:none;z-index:99;transform:translate(-50%,-50%);transition:transform .08s ease-out,width .2s,height .2s;display:none}
+@media(hover:hover) and (pointer:fine){.dot{display:block}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;background:var(--bone);border-bottom:2px solid var(--ink)}
+.nav-in{max-width:1240px;margin:auto;padding:16px 28px;display:flex;align-items:center;gap:24px}
+.logo{font-weight:800;font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo .box{width:34px;height:34px;background:var(--cobalt);display:grid;place-items:center}
+.logo .box svg{width:76%}
+.links{display:flex;gap:26px;margin-left:auto}
+.links a{font-family:'Space Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;position:relative;padding:4px 0}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--cobalt);transition:width .2s}
+.links a:hover::after{width:100%}
+.bag{font-family:'Space Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;border:2px solid var(--ink);padding:9px 16px;transition:.15s;cursor:pointer;background:none}
+.bag:hover{background:var(--ink);color:var(--bone)}
+
+/* hero */
+.hero{padding:64px 0 40px;position:relative}
+.hero .rows{font-weight:800;text-transform:uppercase;line-height:.92;letter-spacing:-.025em}
+.row{display:block;font-size:clamp(3.4rem,12.5vw,10.5rem);transition:letter-spacing .3s,color .3s}
+.row:hover{letter-spacing:.015em}
+.r2{color:var(--cobalt)}
+.r3{color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+.r3:hover{color:var(--orange);-webkit-text-stroke:2.5px var(--orange)}
+.hero-meta{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-top:38px;flex-wrap:wrap;border-top:4px solid var(--cobalt);padding-top:26px}
+.hero-meta p{max-width:44ch;font-size:1.1rem;font-weight:600}
+.hero-meta .mono{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#5B5B66}
+.badge{position:absolute;top:8px;right:28px;width:130px;height:130px;border-radius:50%;background:var(--orange);color:var(--bone);display:grid;place-items:center;text-align:center;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;line-height:1.5;transform:rotate(10deg);padding:14px;border:3px solid var(--ink)}
+.cta-row{display:flex;gap:16px;margin-top:30px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;padding:16px 30px;border:2px solid var(--ink);cursor:pointer;transition:.16s;background:var(--ink);color:var(--bone)}
+.btn:hover{background:var(--cobalt);border-color:var(--cobalt);gap:16px}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bone);gap:16px}
+
+/* marquee */
+.marq{background:var(--cobalt);color:var(--bone);border-block:2px solid var(--ink);padding:13px 0;overflow:hidden;white-space:nowrap}
+.marq div{display:inline-block;animation:mv 22s linear infinite;font-family:'Space Mono',monospace;font-weight:700;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase}
+.marq span{margin:0 26px}
+@keyframes mv{to{transform:translateX(-50%)}}
+
+section{padding:90px 0}
+.shead{display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:42px}
+.shead .idx{font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.14em;color:var(--cobalt);font-weight:700}
+.shead h2{font-size:clamp(1.9rem,4.4vw,3.2rem);font-weight:800;text-transform:uppercase;letter-spacing:-.02em}
+.shead .hint{font-family:'Space Mono',monospace;font-size:.75rem;letter-spacing:.1em;color:#5B5B66}
+
+/* horizontal rail */
+.rail-clip{overflow:hidden;margin:0 -28px;padding:0 28px}
+.rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 26px;scrollbar-color:var(--cobalt) transparent;scrollbar-width:thin}
+.rail::-webkit-scrollbar{height:8px}
+.rail::-webkit-scrollbar-track{background:rgba(18,18,26,.08)}
+.rail::-webkit-scrollbar-thumb{background:var(--cobalt)}
+.rcard{flex:0 0 min(310px,80vw);scroll-snap-align:start;border:2px solid var(--ink);background:#fff;display:flex;flex-direction:column;transition:.18s}
+.rcard .top{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 16px;border-bottom:2px solid var(--ink)}
+.rcard .ph{aspect-ratio:1.05;display:grid;place-items:center;font-size:4.6rem;border-bottom:2px solid var(--ink);background:var(--bone);transition:.18s}
+.rcard .body{padding:18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.rcard h3{font-size:1.25rem;font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
+.rcard .brow{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.rcard .price{font-family:'Space Mono',monospace;font-weight:700;font-size:1rem}
+.rcard .go{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;letter-spacing:.08em;background:none;border:none;cursor:pointer;color:inherit;display:inline-flex;gap:8px;transition:gap .15s}
+.rcard .go:hover{gap:14px}
+.rcard:hover{background:var(--cobalt);color:var(--bone);border-color:var(--cobalt);transform:translateY(-6px)}
+.rcard:hover .top,.rcard:hover .ph{border-color:var(--bone)}
+.rcard:hover .price{color:var(--orange)}
+
+/* manifesto */
+.mani{background:var(--ink);color:var(--bone)}
+.mani .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:start}
+.mani h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;text-transform:uppercase;line-height:1.06;letter-spacing:-.02em}
+.mani h2 .o{color:var(--orange)}
+.mani h2 .c{color:transparent;-webkit-text-stroke:1.8px var(--bone)}
+.rules{display:grid}
+.rule{display:flex;gap:22px;align-items:baseline;padding:22px 0;border-bottom:3px solid var(--cobalt)}
+.rule:first-child{padding-top:6px}
+.rule .n{font-family:'Space Mono',monospace;color:var(--orange);font-weight:700;font-size:.85rem;flex:none}
+.rule p{font-weight:600;font-size:1.02rem}
+
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink)}
+.tile{aspect-ratio:1;display:grid;place-items:center;font-size:4rem;border-right:2px solid var(--ink);transition:.2s;position:relative;overflow:hidden}
+.tile:last-child{border-right:none}
+.tile:hover{font-size:5.2rem}
+.tl1{background:var(--cobalt)}
+.tl2{background:var(--bone)}
+.tl3{background:var(--orange)}
+.tl4{background:#fff}
+.tile .lab{position:absolute;bottom:10px;left:12px;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.tl1 .lab,.tl3 .lab{color:var(--bone)}
+
+/* cta band */
+.band{background:var(--cobalt);border-block:2px solid var(--ink);color:var(--bone);text-align:center;padding:90px 24px}
+.band h2{font-size:clamp(2.2rem,7vw,4.6rem);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1}
+.band h2 span{color:transparent;-webkit-text-stroke:2px var(--bone)}
+.band p{font-family:'Space Mono',monospace;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin:20px 0 32px;opacity:.9}
+.bfield{display:flex;justify-content:center;gap:0;flex-wrap:wrap;max-width:520px;margin:auto}
+.bfield input{flex:1;min-width:min(280px,72vw);padding:16px 18px;border:2px solid var(--bone);background:transparent;color:var(--bone);font-family:'Space Mono',monospace;font-size:.9rem}
+.bfield input::placeholder{color:rgba(242,240,234,.6)}
+.bfield input:focus{outline:none;border-color:var(--orange)}
+.bfield .btn{border-color:var(--bone);background:var(--orange)}
+.bfield .btn:hover{background:var(--ink);border-color:var(--ink)}
+
+/* footer */
+footer{background:var(--ink);color:var(--bone);padding:60px 0 0;overflow:hidden}
+.f-grid{max-width:1240px;margin:auto;padding:0 28px 44px;display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.f-grid .mono{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+.f-grid h4{font-family:'Space Mono',monospace;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.f-grid a{display:block;padding:4px 0;font-weight:600;font-size:.95rem}
+.f-grid a:hover{color:var(--orange)}
+.wordmark{font-weight:800;text-transform:uppercase;font-size:clamp(3rem,11.5vw,9.6rem);line-height:.85;letter-spacing:-.03em;text-align:center;color:transparent;-webkit-text-stroke:2px rgba(242,240,234,.35);white-space:nowrap;padding:10px 0 26px;user-select:none}
+
+@media(max-width:940px){
+  .links{display:none}
+  .badge{position:static;transform:rotate(-6deg);margin-top:24px}
+  .mani .wrap{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr 1fr}
+  .tile:nth-child(2){border-right:none}
+  .tile:nth-child(1),.tile:nth-child(2){border-bottom:2px solid var(--ink)}
+}
+@media(max-width:520px){
+  .tiles{grid-template-columns:1fr}
+  .tile{border-right:none;border-bottom:2px solid var(--ink)}
+  .tile:last-child{border-bottom:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .dot{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="dot" id="dot" aria-hidden="true"></div>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="logo">
+      <span class="box">
+        <svg viewBox="0 0 120 120" fill="none" stroke="#F2F0EA" stroke-width="6" stroke-linecap="round" role="img" aria-label="Smiling Panda logo">
+          <circle cx="34" cy="30" r="13"/><circle cx="86" cy="30" r="13"/>
+          <circle cx="60" cy="66" r="36"/>
+          <ellipse cx="46" cy="58" rx="8" ry="11" fill="#F2F0EA" stroke="none" transform="rotate(-14 46 58)"/>
+          <ellipse cx="74" cy="58" rx="8" ry="11" fill="#F2F0EA" stroke="none" transform="rotate(14 74 58)"/>
+          <path d="M51 82 Q60 91 69 82"/>
+        </svg>
+      </span>
+      Smiling Panda
+    </a>
+    <div class="links">
+      <a href="#rail">01 / The rail</a>
+      <a href="#mani">02 / Manifesto</a>
+      <a href="#join">03 / Join</a>
+    </div>
+    <button class="bag" onclick="bag(this)">Bag [<span id="n">0</span>]</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1 class="rows">
+      <span class="row">Smiling</span>
+      <span class="row r2">Panda©</span>
+      <span class="row r3">Goods™</span>
+    </h1>
+    <span class="badge">EST. 2026 ✶ SHIPS IN 24H ✶ WORLDWIDE</span>
+    <div class="hero-meta">
+      <p>Sharply designed everyday objects from a two-person studio. Small drops. Loud opinions. Free shipping over $40.</p>
+      <span class="mono">SCROLL ↓ / DROP 04 — JULY 2026</span>
+    </div>
+    <div class="cta-row">
+      <a href="#rail" class="btn">Shop the drop →</a>
+      <a href="#mani" class="btn ghost">Read the manifesto</a>
+    </div>
+  </div>
+</header>
+
+<div class="marq" aria-hidden="true">
+  <div>
+    <span>Drop 04 live now</span><span>✶</span><span>Free shipping over $40</span><span>✶</span><span>30-day returns</span><span>✶</span><span>Carbon-neutral post</span><span>✶</span>
+    <span>Drop 04 live now</span><span>✶</span><span>Free shipping over $40</span><span>✶</span><span>30-day returns</span><span>✶</span><span>Carbon-neutral post</span><span>✶</span>
+  </div>
+</div>
+
+<section id="rail">
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <div class="idx">01 — THE RAIL</div>
+        <h2>Current drop</h2>
+      </div>
+      <span class="hint">( DRAG / SCROLL → )</span>
+    </div>
+  </div>
+  <div class="wrap rail-clip">
+    <div class="rail">
+      <article class="rcard">
+        <div class="top"><span>No.01</span><span>Drinkware</span></div>
+        <div class="ph">☕</div>
+        <div class="body">
+          <h3>Cloud Mug</h3>
+          <div class="brow"><span class="price">$21.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+      <article class="rcard">
+        <div class="top"><span>No.02</span><span>Wearables</span></div>
+        <div class="ph">👕</div>
+        <div class="body">
+          <h3>Grin Tee</h3>
+          <div class="brow"><span class="price">$34.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+      <article class="rcard">
+        <div class="top"><span>No.03</span><span>Stationery</span></div>
+        <div class="ph">📓</div>
+        <div class="body">
+          <h3>Ink Notebook</h3>
+          <div class="brow"><span class="price">$16.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+      <article class="rcard">
+        <div class="top"><span>No.04</span><span>Wearables</span></div>
+        <div class="ph">🧢</div>
+        <div class="body">
+          <h3>Panda Cap</h3>
+          <div class="brow"><span class="price">$27.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+      <article class="rcard">
+        <div class="top"><span>No.05</span><span>Plush</span></div>
+        <div class="ph">🧸</div>
+        <div class="body">
+          <h3>Mochi Plush</h3>
+          <div class="brow"><span class="price">$18.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+      <article class="rcard">
+        <div class="top"><span>No.06</span><span>Bundle</span></div>
+        <div class="ph">📦</div>
+        <div class="body">
+          <h3>Full Drop Box</h3>
+          <div class="brow"><span class="price">$99.00</span><button class="go" onclick="bagAdd(this)">ADD →</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="mani" id="mani">
+  <div class="wrap">
+    <div>
+      <div class="idx" style="font-family:'Space Mono',monospace;font-size:.8rem;letter-spacing:.14em;color:var(--orange);font-weight:700;margin-bottom:16px">02 — MANIFESTO</div>
+      <h2>Fewer things.<br><span class="o">Better things.</span><br><span class="c">Happier you.</span></h2>
+    </div>
+    <div class="rules">
+      <div class="rule"><span class="n">R.01</span><p>Six products per drop. Quality has a headcount.</p></div>
+      <div class="rule"><span class="n">R.02</span><p>Everything designed in-house — no white-label, ever.</p></div>
+      <div class="rule"><span class="n">R.03</span><p>Every parcel packed, checked and stamped by a human.</p></div>
+      <div class="rule"><span class="n">R.04</span><p>Not grinning in 30 days? Send it back. We pay the post.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead">
+      <div>
+        <div class="idx">03 — THE GRID</div>
+        <h2>Four moods</h2>
+      </div>
+      <span class="hint">( HOVER ME )</span>
+    </div>
+    <div class="tiles">
+      <a class="tile tl1" href="#rail">☕<span class="lab">Drinkware</span></a>
+      <a class="tile tl2" href="#rail">📓<span class="lab">Stationery</span></a>
+      <a class="tile tl3" href="#rail">🧸<span class="lab">Plush</span></a>
+      <a class="tile tl4" href="#rail">🧢<span class="lab">Wearables</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="band" id="join">
+  <h2>Get first <span>dibs</span></h2>
+  <p>Drop 05 lands August · list members get 24h early access + 10% off</p>
+  <form class="bfield" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('LOCKED IN ✶ Code GRIN10 is on its way.');">
+    <input type="email" placeholder="YOU@EXAMPLE.COM" aria-label="Email address" required>
+    <button class="btn" type="submit">Sign up</button>
+  </form>
+</div>
+
+<footer>
+  <div class="f-grid">
+    <div>
+      <h4>Smiling Panda</h4>
+      <p class="mono" style="max-width:30ch;opacity:.75">Sharply designed everyday objects. Two humans, one studio, monthly drops.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#rail">Current drop</a>
+      <a href="#rail">Archive</a>
+      <a href="#join">Early access</a>
+    </div>
+    <div>
+      <h4>Info</h4>
+      <a href="#mani">Manifesto</a>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:studio@smilingpanda.shop">studio@smilingpanda.shop</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="wordmark" aria-hidden="true">Smiling Panda®</div>
+</footer>
+
+<script>
+/* cursor dot */
+const dot=document.getElementById('dot');
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+  addEventListener('mousemove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px'});
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{dot.style.width='34px';dot.style.height='34px';dot.style.opacity='.55'});
+    el.addEventListener('mouseleave',()=>{dot.style.width='14px';dot.style.height='14px';dot.style.opacity='1'});
+  });
+}
+/* bag counter */
+const n=document.getElementById('n');
+function bagAdd(b){n.textContent=+n.textContent+1;const t=b.textContent;b.textContent='ADDED ✶';setTimeout(()=>b.textContent=t,1000)}
+function bag(b){alert('Bag is a demo — checkout plugs in here.')}
+</script>
+</body>
+</html>
