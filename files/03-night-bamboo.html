@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smiling Panda — Little luxuries for slow evenings</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#15132E;
+  --plum:#221E4A;
+  --plum2:#2C2760;
+  --gold:#F4C95D;
+  --goldsoft:#F8DE9C;
+  --lav:#C9C4EE;
+  --moon:#FFF6E3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Mulish',system-ui,sans-serif;color:var(--lav);line-height:1.7;
+  background:radial-gradient(1200px 700px at 70% -10%, #322B6B 0%, var(--plum) 38%, var(--night) 100%);
+  background-attachment:fixed;
+}
+h1,h2,h3{font-family:'Marcellus',Georgia,serif;color:var(--moon);font-weight:400;line-height:1.2;letter-spacing:.01em}
+a{text-decoration:none;color:inherit}
+svg,img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:4px}
+
+/* ---------- stars ---------- */
+.stars-bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+.star{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--goldsoft);opacity:.7;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:.9;transform:scale(1.15)}}
+main,nav,footer{position:relative;z-index:1}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(21,19,46,.8);backdrop-filter:blur(10px);border-bottom:1px solid rgba(244,201,93,.18)}
+.nav-inner{max-width:1080px;margin:auto;padding:16px 24px;display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Marcellus',serif;font-size:1.25rem;color:var(--moon);letter-spacing:.06em}
+.logo .mark{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--goldsoft),var(--gold));display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(244,201,93,.5)}
+.logo .mark svg{width:70%}
+.nav-links{display:flex;gap:28px;margin-left:auto;font-size:.92rem;letter-spacing:.06em;text-transform:uppercase}
+.nav-links a{opacity:.8;padding:6px 0;border-bottom:1px solid transparent;transition:.25s}
+.nav-links a:hover{opacity:1;border-color:var(--gold);color:var(--goldsoft)}
+.btn{display:inline-block;font-weight:700;font-size:.92rem;letter-spacing:.08em;text-transform:uppercase;color:var(--night);background:linear-gradient(135deg,var(--goldsoft),var(--gold));padding:13px 30px;border-radius:999px;border:none;cursor:pointer;transition:box-shadow .25s,transform .25s}
+.btn:hover{box-shadow:0 0 26px rgba(244,201,93,.55);transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--goldsoft);border:1px solid rgba(244,201,93,.55)}
+.btn.ghost:hover{background:rgba(244,201,93,.1)}
+
+/* ---------- HERO ---------- */
+.hero{max-width:1080px;margin:auto;padding:90px 24px 70px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.kicker{font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.hero h1{font-size:clamp(2.5rem,5vw,3.7rem);margin-bottom:20px}
+.hero p{font-size:1.08rem;max-width:46ch;margin-bottom:34px;opacity:.92}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.moon-scene{position:relative;display:flex;justify-content:center;align-items:center}
+.moon{width:min(340px,85%);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 38% 32%,#FFFDF4,var(--goldsoft) 55%,var(--gold));box-shadow:0 0 60px rgba(244,201,93,.45),0 0 140px rgba(244,201,93,.25);display:flex;align-items:center;justify-content:center;animation:drift 10s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.moon svg{width:62%}
+.hero-note{position:absolute;bottom:-8px;background:rgba(21,19,46,.85);border:1px solid rgba(244,201,93,.35);border-radius:14px;padding:12px 20px;font-size:.88rem;backdrop-filter:blur(6px)}
+.hero-note strong{color:var(--goldsoft)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:90px 24px}
+.wrap{max-width:1080px;margin:auto}
+.section-head{text-align:center;max-width:60ch;margin:0 auto 56px}
+.section-head .kicker{margin-bottom:14px}
+.section-head h2{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:14px}
+.section-head p{opacity:.85}
+.divider{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto 0}
+
+/* collection */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:rgba(255,255,255,.045);border:1px solid rgba(244,201,93,.16);border-radius:20px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-8px);border-color:rgba(244,201,93,.55);box-shadow:0 22px 44px rgba(0,0,0,.4)}
+.card .thumb{aspect-ratio:1.05;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(160deg,var(--plum2),var(--plum))}
+.card .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-size:1.25rem}
+.card .desc{font-size:.92rem;opacity:.8}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid rgba(244,201,93,.14)}
+.price{font-family:'Marcellus',serif;color:var(--goldsoft);font-size:1.15rem}
+.add{background:none;border:1px solid rgba(244,201,93,.5);color:var(--goldsoft);border-radius:999px;padding:8px 18px;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:.25s;font-family:inherit;font-weight:600}
+.add:hover{background:var(--gold);color:var(--night)}
+
+/* ritual */
+.ritual{background:rgba(0,0,0,.22);border-block:1px solid rgba(244,201,93,.14)}
+.ritual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;text-align:center}
+.ritual-item .glyph{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;border:1px solid rgba(244,201,93,.45);display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:rgba(244,201,93,.07)}
+.ritual-item h3{font-size:1.2rem;margin-bottom:8px}
+.ritual-item p{font-size:.93rem;opacity:.82}
+
+/* quote */
+.quote{text-align:center}
+.quote blockquote{font-family:'Marcellus',serif;font-size:clamp(1.35rem,2.8vw,2rem);color:var(--moon);max-width:36ch;margin:0 auto 20px}
+.quote .g{color:var(--gold);font-size:2.4rem;display:block;margin-bottom:8px}
+.quote cite{font-style:normal;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+
+/* newsletter */
+.news .panel{border:1px solid rgba(244,201,93,.3);border-radius:24px;padding:64px 34px;text-align:center;background:linear-gradient(160deg,rgba(244,201,93,.08),rgba(244,201,93,.02))}
+.news h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:12px}
+.news p{opacity:.85;margin-bottom:30px}
+.field{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.field input{padding:14px 22px;border-radius:999px;border:1px solid rgba(244,201,93,.4);background:rgba(21,19,46,.6);color:var(--moon);min-width:min(330px,78vw);font-size:1rem;font-family:inherit}
+.field input::placeholder{color:#8f89c4}
+.field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 16px rgba(244,201,93,.3)}
+
+/* footer */
+footer{border-top:1px solid rgba(244,201,93,.16);padding:54px 24px 30px;background:rgba(0,0,0,.25)}
+.foot{max-width:1080px;margin:auto;display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.foot h4{font-family:'Marcellus',serif;color:var(--goldsoft);margin-bottom:14px;font-weight:400;letter-spacing:.08em}
+.foot a{display:block;padding:4px 0;font-size:.92rem;opacity:.8}
+.foot a:hover{opacity:1;color:var(--goldsoft)}
+.copy{max-width:1080px;margin:38px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:.83rem;opacity:.6;letter-spacing:.04em}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:64px}
+  .hero p{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .product-grid{grid-template-columns:1fr 1fr}
+  .ritual-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media (max-width:600px){
+  .product-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="stars-bg" aria-hidden="true">
+  <span class="star" style="top:12%;left:8%"></span>
+  <span class="star" style="top:22%;left:28%;animation-delay:1.2s"></span>
+  <span class="star" style="top:9%;left:55%;animation-delay:2s"></span>
+  <span class="star" style="top:30%;left:80%;animation-delay:.6s"></span>
+  <span class="star" style="top:55%;left:12%;animation-delay:1.7s"></span>
+  <span class="star" style="top:64%;left:90%;animation-delay:2.6s"></span>
+  <span class="star" style="top:78%;left:45%;animation-delay:.9s"></span>
+  <span class="star" style="top:42%;left:64%;animation-delay:3.1s"></span>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="mark">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+          <circle cx="32" cy="28" r="17" fill="#15132E"/><circle cx="88" cy="28" r="17" fill="#15132E"/>
+          <circle cx="60" cy="64" r="42" fill="none" stroke="#15132E" stroke-width="6"/>
+          <ellipse cx="45" cy="56" rx="10" ry="13" fill="#15132E" transform="rotate(-14 45 56)"/>
+          <ellipse cx="75" cy="56" rx="10" ry="13" fill="#15132E" transform="rotate(14 75 56)"/>
+          <ellipse cx="60" cy="72" rx="6" ry="4.5" fill="#15132E"/>
+          <path d="M50 82 Q60 92 70 82" stroke="#15132E" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      SMILING PANDA
+    </a>
+    <div class="nav-links">
+      <a href="#collection">Collection</a>
+      <a href="#ritual">The ritual</a>
+      <a href="#join">Join</a>
+    </div>
+    <a href="#collection" class="btn">Shop</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero">
+  <div>
+    <div class="kicker">Evening Essentials · Est. 2026</div>
+    <h1>Little luxuries for slow, quiet evenings.</h1>
+    <p>Candles, teas, and calming comforts — curated by Smiling Panda to help you end the day the way it deserves to end: softly.</p>
+    <div class="hero-actions">
+      <a href="#collection" class="btn">Explore the collection</a>
+      <a href="#ritual" class="btn ghost">Our ritual</a>
+    </div>
+  </div>
+  <div class="moon-scene">
+    <div class="moon">
+      <svg viewBox="0 0 120 120" role="img" aria-label="Panda face in the moon">
+        <circle cx="32" cy="28" r="17" fill="#15132E"/><circle cx="88" cy="28" r="17" fill="#15132E"/>
+        <ellipse cx="45" cy="56" rx="10" ry="13" fill="#15132E" transform="rotate(-14 45 56)"/>
+        <ellipse cx="75" cy="56" rx="10" ry="13" fill="#15132E" transform="rotate(14 75 56)"/>
+        <circle cx="46.5" cy="53" r="3.2" fill="#F8DE9C"/><circle cx="73.5" cy="53" r="3.2" fill="#F8DE9C"/>
+        <ellipse cx="60" cy="72" rx="6" ry="4.5" fill="#15132E"/>
+        <path d="M50 82 Q60 92 70 82" stroke="#15132E" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="hero-note"><strong>Tonight's pick:</strong> Moonlit Jasmine candle — burns 42 hours</div>
+  </div>
+</header>
+
+<section id="collection">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The Collection</div>
+      <h2>Chosen slowly, so you can unwind quickly</h2>
+      <p>Every piece is tested by us at home first. If it doesn't make an evening better, it doesn't make the shop.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="product-grid">
+      <a class="card" href="#">
+        <div class="thumb">🕯️</div>
+        <div class="body">
+          <h3>Moonlit Jasmine Candle</h3>
+          <p class="desc">Hand-poured soy wax with jasmine and sandalwood. 42-hour burn.</p>
+          <div class="meta"><span class="price">$32</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">🍵</div>
+        <div class="body">
+          <h3>Midnight Chamomile Tea</h3>
+          <p class="desc">Loose-leaf blend with lavender and honeybush. 20 servings.</p>
+          <div class="meta"><span class="price">$19</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">🧦</div>
+        <div class="body">
+          <h3>Cloud-Soft Lounge Socks</h3>
+          <p class="desc">Brushed bamboo fibre, panda-ear cuff. Dangerously cozy.</p>
+          <div class="meta"><span class="price">$14</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">📖</div>
+        <div class="body">
+          <h3>Wind-Down Journal</h3>
+          <p class="desc">Three gentle prompts a night. Linen cover, ribbon marker.</p>
+          <div class="meta"><span class="price">$22</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">🛁</div>
+        <div class="body">
+          <h3>Bamboo Milk Bath Soak</h3>
+          <p class="desc">Oat milk and bamboo extract for water you'll melt into.</p>
+          <div class="meta"><span class="price">$26</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">🎁</div>
+        <div class="body">
+          <h3>The Slow Evening Box</h3>
+          <p class="desc">Candle, tea, socks, and journal — the full ritual, gift-wrapped.</p>
+          <div class="meta"><span class="price">$79</span><button class="add">Add to bag</button></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="ritual" id="ritual">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The Ritual</div>
+      <h2>How a Smiling Panda evening works</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="ritual-grid">
+      <div class="ritual-item">
+        <div class="glyph">🌙</div>
+        <h3>Dim</h3>
+        <p>Light the candle, lower the lights, put the phone somewhere it can't find you.</p>
+      </div>
+      <div class="ritual-item">
+        <div class="glyph">🫖</div>
+        <h3>Steep</h3>
+        <p>Four minutes for the tea. Long enough to change into the soft socks.</p>
+      </div>
+      <div class="ritual-item">
+        <div class="glyph">✍️</div>
+        <h3>Settle</h3>
+        <p>Three journal lines about the day. Then nothing at all. That's the point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="wrap">
+    <blockquote><span class="g">"</span>I bought the Slow Evening Box as a treat after a brutal work month. It genuinely changed how my nights feel.</blockquote>
+    <cite>Nadia K. · Verified buyer</cite>
+  </div>
+</section>
+
+<section class="news" id="join">
+  <div class="wrap">
+    <div class="panel">
+      <h2>Join the Quiet Hours list</h2>
+      <p>One calm email each new moon: restocks, small rituals, and 10% off your first order.</p>
+      <form class="field" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Welcome to the Quiet Hours. Your code is on its way. 🌙');">
+        <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn" type="submit">Join</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>SMILING PANDA</h4>
+      <p style="max-width:32ch;font-size:.92rem;opacity:.8">Little luxuries for slow evenings, shipped worldwide in plastic-free packaging.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#collection">The collection</a>
+      <a href="#collection">Gift boxes</a>
+      <a href="#collection">Restocks</a>
+    </div>
+    <div>
+      <h4>Care</h4>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">Candle care</a>
+    </div>
+    <div>
+      <h4>Write to us</h4>
+      <a href="mailto:evening@smilingpanda.shop">evening@smilingpanda.shop</a>
+      <a href="#">Instagram</a>
+      <a href="#">Pinterest</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 Smiling Panda · Rest well</div>
+</footer>
+
+</body>
+</html>

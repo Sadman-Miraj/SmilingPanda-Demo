@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smiling Panda — Seriously fun stuff</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#FFD60A;
+  --pink:#FF5D8F;
+  --blue:#3A86FF;
+  --mintpop:#2EC4B6;
+  --ink:#1A1A1A;
+  --paper:#FFFDF7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Karla',system-ui,sans-serif;color:var(--ink);line-height:1.6;
+  background:var(--paper);
+  background-image:radial-gradient(#1a1a1a12 1.5px,transparent 1.5px);
+  background-size:26px 26px;
+}
+h1,h2,h3{font-family:'Fredoka',system-ui,sans-serif;line-height:1.1}
+a{text-decoration:none;color:inherit}
+svg,img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+.border-card{background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);transition:transform .18s,box-shadow .18s}
+.border-card:hover{transform:translate(-3px,-3px);box-shadow:10px 10px 0 var(--ink)}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--yellow);border-bottom:3px solid var(--ink)}
+.nav-inner{max-width:1120px;margin:auto;padding:14px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.3rem}
+.logo svg{width:40px;height:40px}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-weight:700;font-size:.95rem}
+.nav-links a{padding:5px 10px;border:3px solid transparent;border-radius:12px;transition:.15s}
+.nav-links a:hover{background:#fff;border-color:var(--ink)}
+.btn{display:inline-block;font-family:'Fredoka',sans-serif;font-weight:600;font-size:1rem;background:var(--pink);color:#fff;padding:12px 26px;border:3px solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn.blue{background:var(--blue)}
+.btn.ink{background:var(--ink)}
+
+/* ---------- HERO ---------- */
+.hero{max-width:1120px;margin:auto;padding:64px 24px 56px;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+.tag{display:inline-block;background:var(--mintpop);color:#fff;font-family:'Fredoka',sans-serif;font-weight:600;font-size:.85rem;padding:7px 16px;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg);margin-bottom:22px}
+.hero h1{font-size:clamp(2.6rem,6vw,4.2rem);margin-bottom:16px}
+.hero h1 .hl{background:var(--yellow);padding:0 12px;border-radius:12px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero p{font-size:1.15rem;max-width:44ch;margin-bottom:30px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-art{position:relative;display:flex;justify-content:center}
+.panda-frame{width:min(360px,88%);aspect-ratio:1;background:var(--blue);border:4px solid var(--ink);border-radius:28px;box-shadow:10px 10px 0 var(--ink);display:flex;align-items:center;justify-content:center;transform:rotate(2deg)}
+.panda-frame svg{width:70%}
+.sticker{position:absolute;font-family:'Fredoka',sans-serif;font-weight:600;border:3px solid var(--ink);border-radius:999px;padding:9px 18px;box-shadow:4px 4px 0 var(--ink);background:#fff}
+.s1{top:2%;left:6%;background:var(--yellow);transform:rotate(-8deg)}
+.s2{bottom:6%;right:2%;background:var(--pink);color:#fff;transform:rotate(6deg)}
+
+/* ---------- MARQUEE ---------- */
+.marquee{background:var(--ink);color:var(--yellow);border-block:3px solid var(--ink);overflow:hidden;padding:13px 0;font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.05rem;white-space:nowrap}
+.marquee-track{display:inline-block;animation:scroll 22s linear infinite}
+.marquee span{margin:0 26px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- SECTIONS ---------- */
+section{padding:84px 24px}
+.wrap{max-width:1120px;margin:auto}
+.section-head{text-align:center;margin-bottom:50px}
+.section-head h2{font-size:clamp(2rem,4vw,2.8rem)}
+.section-head .under{display:inline-block;background:var(--pink);color:#fff;transform:rotate(-1.5deg);padding:2px 14px;border-radius:10px}
+.section-head p{margin-top:12px;font-size:1.05rem}
+
+/* products */
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.card{overflow:hidden;display:flex;flex-direction:column;position:relative}
+.card .thumb{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:4.2rem;border-bottom:3px solid var(--ink)}
+.p1{background:#FFE9A8}.p2{background:#FFD1DF}.p3{background:#CDE3FF}.p4{background:#C4F0EA}
+.card .body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card h3{font-size:1.15rem}
+.card .why{font-size:.9rem;color:#444}
+.card .meta{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-family:'Fredoka',sans-serif;font-weight:600;font-size:1.15rem}
+.add{font-family:'Fredoka',sans-serif;font-weight:600;background:var(--yellow);border:3px solid var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:.15s}
+.add:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.flag{position:absolute;top:14px;left:14px;background:var(--ink);color:#fff;font-family:'Fredoka',sans-serif;font-size:.75rem;font-weight:600;padding:6px 12px;border-radius:999px;transform:rotate(-4deg)}
+
+/* steps */
+.steps{background:var(--yellow);border-block:3px solid var(--ink)}
+.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.step{background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);padding:30px 26px;text-align:center}
+.step .big{font-family:'Fredoka',sans-serif;font-size:2.6rem;margin-bottom:6px}
+.step h3{font-size:1.25rem;margin-bottom:8px}
+.step p{font-size:.95rem}
+
+/* reviews */
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.review{padding:26px}
+.review .stars{color:var(--pink);letter-spacing:3px;margin-bottom:12px;font-size:1.05rem}
+.review p{font-size:.98rem;margin-bottom:14px}
+.review .who{font-family:'Fredoka',sans-serif;font-weight:600;font-size:.9rem}
+
+/* CTA banner */
+.cta .panel{background:var(--pink);border:4px solid var(--ink);border-radius:26px;box-shadow:10px 10px 0 var(--ink);padding:60px 34px;text-align:center;color:#fff}
+.cta h2{font-size:clamp(2rem,4vw,2.9rem);margin-bottom:12px}
+.cta p{font-size:1.1rem;margin-bottom:28px}
+.field{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.field input{padding:13px 20px;border:3px solid var(--ink);border-radius:999px;min-width:min(320px,78vw);font-size:1rem;font-family:inherit}
+.field input:focus{outline:3px solid var(--yellow)}
+
+/* footer */
+footer{background:var(--ink);color:#fff;padding:50px 24px 28px}
+.foot{max-width:1120px;margin:auto;display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap}
+.foot h4{font-family:'Fredoka',sans-serif;margin-bottom:12px;color:var(--yellow)}
+.foot a{display:block;padding:4px 0;opacity:.85;font-size:.95rem}
+.foot a:hover{opacity:1;color:var(--yellow)}
+.copy{max-width:1120px;margin:34px auto 0;padding-top:20px;border-top:2px solid #ffffff2b;text-align:center;font-size:.85rem;opacity:.75}
+
+@media (max-width:920px){
+  .hero{grid-template-columns:1fr;text-align:center}
+  .hero p{margin-inline:auto}
+  .hero-actions{justify-content:center}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .step-grid,.review-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+@media (max-width:560px){
+  .product-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .marquee-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+        <circle cx="32" cy="28" r="17" fill="#1A1A1A"/><circle cx="88" cy="28" r="17" fill="#1A1A1A"/>
+        <circle cx="60" cy="64" r="42" fill="#fff" stroke="#1A1A1A" stroke-width="6"/>
+        <ellipse cx="45" cy="56" rx="10" ry="13" fill="#1A1A1A" transform="rotate(-14 45 56)"/>
+        <ellipse cx="75" cy="56" rx="10" ry="13" fill="#1A1A1A" transform="rotate(14 75 56)"/>
+        <circle cx="46.5" cy="53" r="3.4" fill="#fff"/><circle cx="73.5" cy="53" r="3.4" fill="#fff"/>
+        <ellipse cx="60" cy="72" rx="6" ry="4.5" fill="#1A1A1A"/>
+        <path d="M50 82 Q60 92 70 82" stroke="#1A1A1A" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="72" r="5.5" fill="#FF5D8F"/><circle cx="82" cy="72" r="5.5" fill="#FF5D8F"/>
+      </svg>
+      Smiling Panda
+    </a>
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#how">How it works</a>
+      <a href="#love">Reviews</a>
+    </div>
+    <a href="#shop" class="btn">Shop now →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="tag">✦ 2,400+ happy humans</span>
+    <h1>Stuff so fun, <span class="hl">it should be illegal.</span></h1>
+    <p>Smiling Panda is your new favourite little shop — playful gifts, cheerful desk goods, and treats that turn "meh" days around fast.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn">Start shopping</a>
+      <a href="#how" class="btn blue">How it works</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="panda-frame">
+      <svg viewBox="0 0 120 120" role="img" aria-label="Smiling panda illustration">
+        <circle cx="32" cy="28" r="17" fill="#1A1A1A"/><circle cx="88" cy="28" r="17" fill="#1A1A1A"/>
+        <circle cx="60" cy="64" r="42" fill="#fff" stroke="#1A1A1A" stroke-width="6"/>
+        <ellipse cx="45" cy="56" rx="10" ry="13" fill="#1A1A1A" transform="rotate(-14 45 56)"/>
+        <ellipse cx="75" cy="56" rx="10" ry="13" fill="#1A1A1A" transform="rotate(14 75 56)"/>
+        <circle cx="46.5" cy="53" r="3.4" fill="#fff"/><circle cx="73.5" cy="53" r="3.4" fill="#fff"/>
+        <ellipse cx="60" cy="72" rx="6" ry="4.5" fill="#1A1A1A"/>
+        <path d="M50 82 Q60 92 70 82" stroke="#1A1A1A" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="38" cy="72" r="5.5" fill="#FFD60A"/><circle cx="82" cy="72" r="5.5" fill="#FFD60A"/>
+      </svg>
+    </div>
+    <div class="sticker s1">Ships in 24h 🚀</div>
+    <div class="sticker s2">Gift-ready 🎁</div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>★ FREE SHIPPING OVER $35</span><span>★ NEW DROPS EVERY FRIDAY</span><span>★ 30-DAY SMILE GUARANTEE</span><span>★ PLASTIC-FREE PACKAGING</span>
+    <span>★ FREE SHIPPING OVER $35</span><span>★ NEW DROPS EVERY FRIDAY</span><span>★ 30-DAY SMILE GUARANTEE</span><span>★ PLASTIC-FREE PACKAGING</span>
+  </div>
+</div>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>This week's <span class="under">hot picks</span></h2>
+      <p>Fresh drops land every Friday. When they're gone, they're gone.</p>
+    </div>
+    <div class="product-grid">
+      <a class="card border-card" href="#">
+        <span class="flag">SELLING FAST</span>
+        <div class="thumb p1">🧸</div>
+        <div class="body">
+          <h3>Pocket Panda Plush</h3>
+          <p class="why">Fits in your bag. Fixes your mood.</p>
+          <div class="meta"><span class="price">$18</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="card border-card" href="#">
+        <div class="thumb p2">✏️</div>
+        <div class="body">
+          <h3>Doodle Buddy Pen Set</h3>
+          <p class="why">Six pens. Zero boring meetings.</p>
+          <div class="meta"><span class="price">$12</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="card border-card" href="#">
+        <span class="flag">NEW DROP</span>
+        <div class="thumb p3">🎧</div>
+        <div class="body">
+          <h3>Chill Beats Sticker Pack</h3>
+          <p class="why">20 stickers for laptops with personality.</p>
+          <div class="meta"><span class="price">$9</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+      <a class="card border-card" href="#">
+        <div class="thumb p4">🍪</div>
+        <div class="body">
+          <h3>Snack Attack Gift Box</h3>
+          <p class="why">Treats + a panda note. Instant hero status.</p>
+          <div class="meta"><span class="price">$29</span><button class="add">Add +</button></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Ridiculously easy</h2>
+      <p>Three steps between you and a very good mail day.</p>
+    </div>
+    <div class="step-grid">
+      <div class="step">
+        <div class="big">🛒</div>
+        <h3>1. Pick your faves</h3>
+        <p>Browse the shop and grab whatever makes you smile first.</p>
+      </div>
+      <div class="step">
+        <div class="big">📦</div>
+        <h3>2. We pack it fast</h3>
+        <p>Hand-wrapped and out the door within 24 hours, Monday to Saturday.</p>
+      </div>
+      <div class="step">
+        <div class="big">😁</div>
+        <h3>3. You do the grinning</h3>
+        <p>Track it to your door. Not smiling? 30 days to send it back, free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="love">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>People are <span class="under">obsessed</span></h2>
+    </div>
+    <div class="review-grid">
+      <div class="review border-card">
+        <div class="stars">★★★★★</div>
+        <p>"The sticker pack survived my dishwasher-cursed water bottle. Witchcraft. Buying more."</p>
+        <div class="who">— Tanvir A.</div>
+      </div>
+      <div class="review border-card">
+        <div class="stars">★★★★★</div>
+        <p>"Ordered Tuesday, arrived Thursday with a hand-drawn panda on the box. My whole week = made."</p>
+        <div class="who">— Priya S.</div>
+      </div>
+      <div class="review border-card">
+        <div class="stars">★★★★★</div>
+        <p>"Bought the gift box for a friend having a rough month. She texted me three crying-laughing emojis."</p>
+        <div class="who">— Jordan M.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="panel">
+      <h2>Get 10% off + first dibs on drops</h2>
+      <p>One fun email a week. Unsubscribe anytime (but you won't want to).</p>
+      <form class="field" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('You are in! Code SMILE10 is heading to your inbox 🐼');">
+        <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn ink" type="submit">Count me in</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>Smiling Panda</h4>
+      <p style="max-width:30ch;font-size:.95rem;opacity:.85">Seriously fun stuff, shipped stupid-fast.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#shop">Hot picks</a>
+      <a href="#shop">Gift boxes</a>
+      <a href="#shop">Under $15</a>
+    </div>
+    <div>
+      <h4>Help</h4>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#">Track order</a>
+    </div>
+    <div>
+      <h4>Hang out</h4>
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="mailto:hey@smilingpanda.shop">hey@smilingpanda.shop</a>
+    </div>
+  </div>
+  <div class="copy">© 2026 Smiling Panda · Made with too much energy</div>
+</footer>
+
+</body>
+</html>

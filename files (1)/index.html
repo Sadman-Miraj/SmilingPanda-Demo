@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smiling Panda — Everyday things that make you smile</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171130;--violet:#6C3DF4;--violet-d:#5528DB;--lime:#D9F65B;--lime-d:#C9EF33;--bone:#F7F6F0;--lav:#ECE7FF;--muted:#5B5472;--line:rgba(23,17,48,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6}
+h1,h2,h3,h4{font-family:'Unbounded',sans-serif;line-height:1.14;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:var(--lime)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:60;background:rgba(247,246,240,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:auto;padding:13px 24px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem}
+.logo .tile{width:42px;height:42px;border-radius:13px;background:var(--lime);display:grid;place-items:center;flex:none}
+.logo .tile svg{width:72%}
+.links{display:flex;gap:4px;margin-left:auto;font-weight:500;font-size:.95rem}
+.links a{padding:9px 16px;border-radius:999px;transition:background .2s,color .2s}
+.links a:hover{background:var(--lav)}
+.links a.on{background:var(--ink);color:#fff}
+.cart-link{position:relative;margin-left:8px;width:44px;height:44px;border-radius:999px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:1.1rem;transition:background .2s}
+.cart-link:hover{background:var(--lav)}
+.cart-n{position:absolute;top:-4px;right:-4px;background:var(--violet);color:#fff;font-size:.68rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:grid;place-items:center;padding:0 5px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.97rem;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s,background .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--ink);box-shadow:0 8px 20px rgba(201,239,51,.45)}
+.btn-lime:hover{background:var(--lime-d)}
+.btn-violet{background:var(--violet);color:#fff;box-shadow:0 8px 20px rgba(108,61,244,.3)}
+.btn-violet:hover{background:var(--violet-d)}
+.btn-ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--violet)}
+
+section{padding:84px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--violet-d);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+.h2{font-size:clamp(1.7rem,3.4vw,2.4rem);margin:16px 0 12px}
+.sub{color:var(--muted);max-width:60ch;font-size:1.05rem}
+.center{text-align:center}
+.center .sub{margin-inline:auto}
+
+/* product cards */
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(23,17,48,.12);border-color:transparent}
+.ph{aspect-ratio:1;display:grid;place-items:center;font-size:4rem}
+.t-lav{background:var(--lav)}.t-lime{background:#F0F9CE}.t-mint{background:#DFF3E9}.t-blush{background:#FCE8EF}
+.pb{padding:18px 20px 20px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pb h3{font-size:.95rem}
+.pb .cat{font-size:.8rem;color:var(--muted);font-weight:500}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-family:'Unbounded',sans-serif;font-weight:700;font-size:.95rem}
+.add{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:9px 16px;font-weight:600;font-size:.83rem;cursor:pointer;transition:background .18s}
+.add:hover{background:var(--violet)}
+.add:disabled{background:var(--violet);cursor:default}
+.badge{position:absolute;top:14px;left:14px;background:var(--ink);color:var(--lime);font-size:.7rem;font-weight:700;letter-spacing:.07em;padding:6px 12px;border-radius:999px;z-index:2}
+
+/* marquee */
+.marq{background:var(--ink);color:var(--lime);overflow:hidden;padding:13px 0;white-space:nowrap}
+.tk{display:inline-block;animation:mv 26s linear infinite;font-family:'Unbounded',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:.16em}
+.tk span{margin:0 30px}
+@keyframes mv{to{transform:translateX(-50%)}}
+
+.input{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font:inherit;color:var(--ink)}
+.input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(108,61,244,.14)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* footer */
+footer{background:var(--ink);color:#CFC9E8;margin-top:30px}
+.f-in{max-width:1180px;margin:auto;padding:56px 24px 26px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+footer h4{font-family:'Unbounded',sans-serif;font-size:.82rem;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+footer a{display:block;padding:4px 0;font-size:.92rem;opacity:.85;transition:.2s}
+footer a:hover{opacity:1;color:var(--lime)}
+.f-logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:700;color:#fff;margin-bottom:12px}
+.f-logo .tile{width:38px;height:38px;border-radius:11px;background:var(--lime);display:grid;place-items:center}
+.f-logo .tile svg{width:72%}
+.f-bar{max-width:1180px;margin:auto;padding:20px 24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.83rem;opacity:.7}
+
+/* ---------- page: home ---------- */
+.hero{padding:52px 0 30px}
+.bento{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.b-main{background:linear-gradient(150deg,#FFFFFF,var(--lav));border:1px solid var(--line);border-radius:30px;padding:52px 46px;position:relative;overflow:hidden}
+.b-main::before{content:"";position:absolute;width:420px;height:420px;right:-170px;top:-170px;background:radial-gradient(closest-side,rgba(108,61,244,.32),transparent 70%)}
+.b-main::after{content:"";position:absolute;width:360px;height:360px;left:-150px;bottom:-170px;background:radial-gradient(closest-side,rgba(217,246,91,.85),transparent 70%)}
+.b-main>*{position:relative;z-index:1}
+.b-main h1{font-size:clamp(2rem,4.4vw,3.2rem);margin:18px 0 16px;max-width:14ch}
+.mark{background:var(--lime);padding:2px 14px;border-radius:14px;white-space:nowrap}
+.b-main p{color:var(--muted);max-width:44ch;font-size:1.08rem}
+.b-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.b-social{margin-top:32px;display:flex;align-items:center;gap:14px;font-size:.9rem;color:var(--muted);font-weight:500}
+.avs{display:flex}
+.avs span{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#fff;border:2px solid var(--bone);margin-left:-9px;font-size:1rem}
+.avs span:first-child{margin-left:0}
+.b-side{display:flex;flex-direction:column;gap:18px}
+.b-panda{flex:1;background:var(--violet);border-radius:30px;display:grid;place-items:center;padding:30px;position:relative;overflow:hidden;min-height:250px}
+.b-panda svg{width:min(190px,68%)}
+.chip-float{position:absolute;background:rgba(255,255,255,.14);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.32);color:#fff;font-weight:600;font-size:.8rem;padding:8px 14px;border-radius:999px}
+.cf1{top:16px;left:16px}
+.cf2{bottom:16px;right:16px}
+.b-duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.b-stat{background:var(--lime);border-radius:26px;padding:24px}
+.b-stat .n{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.7rem}
+.b-stat p{font-size:.86rem;font-weight:500;margin-top:4px}
+.b-dark{background:var(--ink);color:#fff;border-radius:26px;padding:24px}
+.b-dark .n{font-family:'Unbounded',sans-serif;font-weight:700;font-size:1.7rem;color:var(--lime)}
+.b-dark p{font-size:.86rem;margin-top:4px;opacity:.85}
+
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.catc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px 22px;display:flex;align-items:center;gap:14px;font-weight:600;transition:transform .2s,box-shadow .2s}
+.catc:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(23,17,48,.1)}
+.catc .ic{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.5rem;flex:none}
+.catc small{display:block;font-weight:500;color:var(--muted);font-size:.8rem}
+
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.wcard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px}
+.wcard .ic{width:54px;height:54px;border-radius:16px;background:var(--lav);display:grid;place-items:center;font-size:1.5rem;margin-bottom:16px}
+.wcard h3{font-size:1.02rem;margin-bottom:8px}
+.wcard p{font-size:.94rem;color:var(--muted)}
+
+.qpanel{background:var(--violet);border-radius:32px;padding:64px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+.qpanel::after{content:"";position:absolute;width:340px;height:340px;left:-140px;bottom:-200px;background:radial-gradient(closest-side,rgba(217,246,91,.5),transparent 70%)}
+.qpanel>*{position:relative;z-index:1}
+.qstars{color:var(--lime);letter-spacing:5px;font-size:1.1rem}
+.qpanel blockquote{font-family:'Unbounded',sans-serif;font-weight:500;font-size:clamp(1.1rem,2.3vw,1.55rem);max-width:44ch;margin:16px auto 18px;line-height:1.45}
+.qpanel cite{font-style:normal;font-size:.9rem;opacity:.85}
+
+.npanel{background:#fff;border:1px solid var(--line);border-radius:32px;padding:56px 32px;text-align:center}
+.nfield{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.nfield .input{max-width:340px}
+
+@media(max-width:960px){
+  .links{display:none}
+  .bento{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .cats{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
+  .f-in{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .pgrid{grid-template-columns:1fr}
+  .cats{grid-template-columns:1fr}
+  .b-duo{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <span class="tile">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+          <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+          <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+          <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+          <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+          <circle cx="47.5" cy="55" r="3" fill="#F7F6F0"/><circle cx="72.5" cy="55" r="3" fill="#F7F6F0"/>
+          <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+          <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      Smiling Panda
+    </a>
+    <div class="links">
+      <a href="index.html" class="on">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="cart.html" class="cart-link" aria-label="Cart">🛒<span class="cart-n" id="cartN">0</span></a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="bento">
+      <div class="b-main">
+        <span class="eyebrow">✦ New drop just landed</span>
+        <h1>Everyday things that make you <span class="mark">smile.</span></h1>
+        <p>Mugs, plushies, stationery and cozy little upgrades — designed in-house, packed by hand, and shipped fast by Smiling Panda.</p>
+        <div class="b-actions">
+          <a href="shop.html" class="btn btn-violet">Shop the collection</a>
+          <a href="about.html" class="btn btn-ghost">Our story</a>
+        </div>
+        <div class="b-social">
+          <div class="avs"><span>😊</span><span>🥰</span><span>😄</span><span>🤩</span></div>
+          Loved by 5,000+ happy customers
+        </div>
+      </div>
+      <div class="b-side">
+        <div class="b-panda">
+          <span class="chip-float cf1">🎋 Bamboo approved</span>
+          <svg viewBox="0 0 120 120" role="img" aria-label="Smiling panda">
+            <circle cx="34" cy="30" r="16" fill="#171130"/><circle cx="86" cy="30" r="16" fill="#171130"/>
+            <circle cx="60" cy="66" r="40" fill="#F7F6F0"/>
+            <ellipse cx="46" cy="58" rx="9.5" ry="12.5" fill="#171130" transform="rotate(-14 46 58)"/>
+            <ellipse cx="74" cy="58" rx="9.5" ry="12.5" fill="#171130" transform="rotate(14 74 58)"/>
+            <circle cx="47.5" cy="55" r="3.2" fill="#F7F6F0"/><circle cx="72.5" cy="55" r="3.2" fill="#F7F6F0"/>
+            <ellipse cx="60" cy="74" rx="5.5" ry="4" fill="#171130"/>
+            <path d="M50 83 Q60 93 70 83" stroke="#171130" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <circle cx="39" cy="73" r="5.5" fill="#D9F65B"/><circle cx="81" cy="73" r="5.5" fill="#D9F65B"/>
+          </svg>
+          <span class="chip-float cf2">Ships in 24h ⚡</span>
+        </div>
+        <div class="b-duo">
+          <div class="b-stat">
+            <div class="n">4.9★</div>
+            <p>Average rating across 800+ reviews</p>
+          </div>
+          <div class="b-dark">
+            <div class="n">30d</div>
+            <p>Smile guarantee — free returns, no questions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marq" aria-hidden="true">
+  <div class="tk">
+    <span>FREE SHIPPING OVER $40</span><span>✦</span><span>NEW DROPS MONTHLY</span><span>✦</span><span>PLASTIC-FREE PACKAGING</span><span>✦</span><span>5,000+ ORDERS SHIPPED</span><span>✦</span>
+    <span>FREE SHIPPING OVER $40</span><span>✦</span><span>NEW DROPS MONTHLY</span><span>✦</span><span>PLASTIC-FREE PACKAGING</span><span>✦</span><span>5,000+ ORDERS SHIPPED</span><span>✦</span>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Browse</span>
+      <h2 class="h2">Pick your vibe</h2>
+    </div>
+    <div class="cats reveal" style="margin-top:36px">
+      <a class="catc" href="shop.html"><span class="ic t-lav">☕</span><span>Drinkware<small>Mugs &amp; teas</small></span></a>
+      <a class="catc" href="shop.html"><span class="ic t-lime">📓</span><span>Stationery<small>Notebooks &amp; pens</small></span></a>
+      <a class="catc" href="shop.html"><span class="ic t-blush">🧸</span><span>Plushies<small>Soft companions</small></span></a>
+      <a class="catc" href="shop.html"><span class="ic t-mint">🧢</span><span>Wearables<small>Caps &amp; socks</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">Featured</span>
+      <h2 class="h2">This month's favourites</h2>
+      <p class="sub">Our four most-loved pieces right now. Tap any card for the full story.</p>
+    </div>
+    <div class="pgrid reveal" style="margin-top:40px">
+      <a class="pcard" href="product.html">
+        <span class="badge">BESTSELLER</span>
+        <div class="ph t-lav">☕</div>
+        <div class="pb">
+          <span class="cat">Drinkware</span>
+          <h3>Cloud Mug</h3>
+          <div class="prow"><span class="price">$21</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html">
+        <div class="ph t-blush">🧸</div>
+        <div class="pb">
+          <span class="cat">Plushies</span>
+          <h3>Mochi Plush</h3>
+          <div class="prow"><span class="price">$18</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html">
+        <div class="ph t-lime">📓</div>
+        <div class="pb">
+          <span class="cat">Stationery</span>
+          <h3>Grin Notebook</h3>
+          <div class="prow"><span class="price">$14</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html">
+        <span class="badge">NEW</span>
+        <div class="ph t-mint">🍵</div>
+        <div class="pb">
+          <span class="cat">Drinkware</span>
+          <h3>Bamboo Calm Tea</h3>
+          <div class="prow"><span class="price">$19</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+    </div>
+    <div class="center" style="margin-top:36px">
+      <a href="shop.html" class="btn btn-dark">View all products →</a>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="center reveal">
+      <span class="eyebrow">The promise</span>
+      <h2 class="h2">Why shop with a panda?</h2>
+    </div>
+    <div class="why reveal" style="margin-top:40px">
+      <div class="wcard">
+        <div class="ic">⚡</div>
+        <h3>Out the door in 24h</h3>
+        <p>Order before 3pm and it ships the same day, with tracking sent straight to your inbox.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">🎁</div>
+        <h3>Gift-ready, always</h3>
+        <p>Tissue paper, a ribbon, and a handwritten note in every box — even if the gift is for you.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">🌍</div>
+        <h3>Zero plastic, zero guilt</h3>
+        <p>Recycled boxes, paper tape, and carbon-neutral delivery on every single order.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="qpanel reveal">
+      <div class="qstars" aria-label="5 star rating">★★★★★</div>
+      <blockquote>"Ordered a gift box on Tuesday, it arrived Thursday wrapped like a tiny present. My friend cried happy tears. Instant loyal customer."</blockquote>
+      <cite>— Maya R., verified buyer</cite>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="npanel reveal">
+      <span class="eyebrow">Panda Post</span>
+      <h2 class="h2">Get 10% off your first order</h2>
+      <p class="sub" style="margin-inline:auto">One short, cheerful email a month — new drops, restocks, and the occasional panda fact.</p>
+      <form class="nfield" onsubmit="event.preventDefault();this.querySelector('input').value='';alert('Welcome aboard! Code SMILE10 is heading to your inbox 🐼');">
+        <input class="input" type="email" placeholder="you@example.com" aria-label="Email address" required>
+        <button class="btn btn-violet" type="submit">Join free</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-in">
+    <div>
+      <div class="f-logo">
+        <span class="tile">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+            <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+            <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+            <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+            <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+            <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Smiling Panda
+      </div>
+      <p style="font-size:.92rem;max-width:30ch">Everyday things that make you smile — designed, packed and shipped with care.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="shop.html">All products</a>
+      <a href="shop.html">Bestsellers</a>
+      <a href="cart.html">Your cart</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About us</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="contact.html#faq">Shipping</a>
+      <a href="contact.html#faq">Returns</a>
+      <a href="mailto:hello@smilingpanda.shop">hello@smilingpanda.shop</a>
+    </div>
+  </div>
+  <div class="f-bar">
+    <span>© 2026 Smiling Panda</span>
+    <span>Made with 🎋 and a lot of tea</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const cartN=document.getElementById('cartN');
+function addCart(b,q=1){cartN.textContent=+cartN.textContent+q;if(b){const t=b.textContent;b.disabled=true;b.textContent='✓ Added';setTimeout(()=>{b.textContent=t;b.disabled=false},1100)}}
+</script>
+</body>
+</html>

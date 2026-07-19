@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smiling Panda — Black. White. Happy.</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#101010;
+  --paper:#FAFAF6;
+  --grey:#8C8C86;
+  --seal:#E63946;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+h1,h2,h3{font-family:'Archivo Black',system-ui,sans-serif;line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+a{text-decoration:none;color:inherit}
+svg,img{display:block;max-width:100%}
+:focus-visible{outline:3px solid var(--seal);outline-offset:3px}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:3px solid var(--ink)}
+.nav-inner{max-width:1160px;margin:auto;padding:16px 24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;font-family:'Archivo Black',sans-serif;font-size:1.05rem;text-transform:uppercase;letter-spacing:.02em}
+.logo .seal-mini{width:38px;height:38px;flex:none}
+.nav-links{display:flex;gap:26px;margin-left:auto;font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em}
+.nav-links a{position:relative;padding:4px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:3px;background:var(--seal);transition:width .22s}
+.nav-links a:hover::after{width:100%}
+.btn{display:inline-block;font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.1em;background:var(--ink);color:var(--paper);padding:14px 30px;border:3px solid var(--ink);cursor:pointer;transition:.18s}
+.btn:hover{background:var(--seal);border-color:var(--seal)}
+.btn.outline{background:transparent;color:var(--ink)}
+.btn.outline:hover{background:var(--ink);color:var(--paper)}
+.btn.inverse{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.btn.inverse:hover{background:var(--seal);color:#fff;border-color:var(--seal)}
+
+/* ---------- HERO ---------- */
+.hero{max-width:1160px;margin:auto;padding:76px 24px 84px;position:relative}
+.hero .kick{font-weight:800;font-size:.85rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);margin-bottom:26px}
+.hero h1{font-size:clamp(3rem,9.5vw,7.2rem)}
+.hero h1 .row{display:block}
+.hero h1 .white-out{color:var(--paper);-webkit-text-stroke:2.5px var(--ink);text-stroke:2.5px var(--ink)}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:44px;flex-wrap:wrap}
+.hero-bottom p{max-width:46ch;font-size:1.12rem;font-weight:500}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.seal{position:absolute;top:60px;right:24px;width:clamp(120px,16vw,190px);animation:spin 26s linear infinite;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- TICKER ---------- */
+.ticker{background:var(--ink);color:var(--paper);border-block:3px solid var(--ink);padding:14px 24px;display:flex;justify-content:center;gap:34px;flex-wrap:wrap;font-weight:800;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase}
+.ticker .dot{color:var(--seal)}
+
+/* ---------- SECTIONS ---------- */
+section{padding:90px 24px}
+.wrap{max-width:1160px;margin:auto}
+.head-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;margin-bottom:52px;flex-wrap:wrap}
+.head-row h2{font-size:clamp(1.9rem,4.4vw,3rem)}
+.head-row .count{font-weight:800;color:var(--seal);font-size:.95rem;letter-spacing:.14em}
+
+/* products */
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:3px solid var(--ink)}
+.card{border-right:3px solid var(--ink);display:flex;flex-direction:column;background:#fff;transition:background .2s}
+.card:last-child{border-right:none}
+.card:hover{background:#F3F3EC}
+.card .thumb{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:4.4rem;border-bottom:3px solid var(--ink);background:var(--paper)}
+.card:nth-child(even) .thumb{background:var(--ink)}
+.card .body{padding:20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:1rem;letter-spacing:0}
+.card .desc{font-size:.88rem;color:#4b4b46}
+.card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px}
+.price{font-family:'Archivo Black',sans-serif;font-size:1.05rem;color:var(--seal)}
+.add{font-weight:800;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;background:none;border:2px solid var(--ink);padding:8px 14px;cursor:pointer;transition:.18s;font-family:inherit}
+.add:hover{background:var(--ink);color:var(--paper)}
+
+/* manifesto — black block */
+.manifesto{background:var(--ink);color:var(--paper)}
+.manifesto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.manifesto h2{font-size:clamp(1.9rem,4.2vw,2.9rem);margin-bottom:22px}
+.manifesto h2 .red{color:var(--seal)}
+.manifesto p{opacity:.88;margin-bottom:16px}
+.rules{border:3px solid var(--paper);padding:34px}
+.rules .rule{display:flex;gap:18px;padding:16px 0;border-bottom:1px solid rgba(250,250,246,.25);align-items:baseline}
+.rules .rule:last-child{border-bottom:none}
+.rules .n{font-family:'Archivo Black',sans-serif;color:var(--seal);font-size:1.1rem;flex:none}
+.rules .rule p{margin:0;opacity:1;font-weight:500}
+
+/* press / social proof */
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:3px solid var(--ink)}
+.proof{padding:34px 30px;border-right:3px solid var(--ink)}
+.proof:last-child{border-right:none}
+.proof .stars{color:var(--seal);letter-spacing:4px;margin-bottom:14px;font-size:1.05rem}
+.proof p{font-weight:500;margin-bottom:16px}
+.proof .who{font-weight:800;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+
+/* newsletter — black block */
+.news{background:var(--ink);color:var(--paper);text-align:center}
+.news h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:14px}
+.news h2 .red{color:var(--seal)}
+.news p{opacity:.85;margin-bottom:34px;font-size:1.05rem}
+.field{display:flex;gap:0;justify-content:center;flex-wrap:wrap;max-width:560px;margin:auto}
+.field input{flex:1;min-width:min(300px,74vw);padding:16px 20px;border:3px solid var(--paper);background:transparent;color:var(--paper);font-size:1rem;font-family:inherit;font-weight:500}
+.field input::placeholder{color:#9a9a94}
+.field input:focus{outline:none;border-color:var(--seal)}
+
+/* footer */
+footer{border-top:3px solid var(--ink);padding:50px 24px 28px}
+.foot{max-width:1160px;margin:auto;display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.foot h4{font-family:'Archivo Black',sans-serif;font-size:.9rem;text-transform:uppercase;margin-bottom:14px}
+.foot a{display:block;padding:4px 0;font-size:.92rem;font-weight:500;color:#3c3c38}
+.foot a:hover{color:var(--seal)}
+.copy{max-width:1160px;margin:36px auto 0;padding-top:20px;border-top:1px solid #d9d9d2;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--grey)}
+
+@media (max-width:960px){
+  .product-grid{grid-template-columns:1fr 1fr}
+  .card:nth-child(2){border-right:none}
+  .card:nth-child(1),.card:nth-child(2){border-bottom:3px solid var(--ink)}
+  .manifesto .wrap{grid-template-columns:1fr}
+  .proof-grid{grid-template-columns:1fr}
+  .proof{border-right:none;border-bottom:3px solid var(--ink)}
+  .proof:last-child{border-bottom:none}
+  .nav-links{display:none}
+  .seal{position:static;margin-top:34px}
+}
+@media (max-width:560px){
+  .product-grid{grid-template-columns:1fr}
+  .card{border-right:none!important;border-bottom:3px solid var(--ink)}
+  .card:last-child{border-bottom:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg class="seal-mini" viewBox="0 0 100 100" role="img" aria-label="Smiling Panda seal">
+        <circle cx="50" cy="50" r="46" fill="#E63946"/>
+        <circle cx="36" cy="42" r="6" fill="#FAFAF6"/><circle cx="64" cy="42" r="6" fill="#FAFAF6"/>
+        <path d="M32 60 Q50 76 68 60" stroke="#FAFAF6" stroke-width="7" fill="none" stroke-linecap="round"/>
+      </svg>
+      Smiling Panda
+    </a>
+    <div class="nav-links">
+      <a href="#shop">Shop</a>
+      <a href="#rules">Manifesto</a>
+      <a href="#proof">Reviews</a>
+    </div>
+    <a href="#shop" class="btn">Shop now</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="seal" viewBox="0 0 200 200" role="img" aria-label="Smiling Panda quality seal">
+    <circle cx="100" cy="100" r="96" fill="#E63946"/>
+    <path id="circlePath" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" fill="none"/>
+    <text font-family="Manrope,sans-serif" font-weight="800" font-size="15.5" letter-spacing="4" fill="#FAFAF6">
+      <textPath href="#circlePath">SMILING PANDA · EST. 2026 · GUARANTEED GRIN ·</textPath>
+    </text>
+    <circle cx="82" cy="92" r="8" fill="#FAFAF6"/><circle cx="118" cy="92" r="8" fill="#FAFAF6"/>
+    <path d="M76 116 Q100 138 124 116" stroke="#FAFAF6" stroke-width="9" fill="none" stroke-linecap="round"/>
+  </svg>
+  <div class="kick">A small shop with strong opinions</div>
+  <h1>
+    <span class="row">Black.</span>
+    <span class="row white-out">White.</span>
+    <span class="row">Happy.</span>
+  </h1>
+  <div class="hero-bottom">
+    <p>Smiling Panda sells sharply designed everyday objects in the only two colours a panda trusts — with one red stamp of approval on everything we ship.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn">Shop the drop</a>
+      <a href="#rules" class="btn outline">Read the manifesto</a>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true">
+  <span>Free shipping over $40</span><span class="dot">●</span>
+  <span>Designed in-house</span><span class="dot">●</span>
+  <span>30-day returns</span><span class="dot">●</span>
+  <span>Carbon-neutral delivery</span>
+</div>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="head-row">
+      <h2>The current drop</h2>
+      <span class="count">04 pieces · restocked monthly</span>
+    </div>
+    <div class="product-grid">
+      <a class="card" href="#">
+        <div class="thumb">☕</div>
+        <div class="body">
+          <h3>Monochrome Mug</h3>
+          <p class="desc">Matte ceramic, 350ml, panda-ear handle.</p>
+          <div class="meta"><span class="price">$21</span><button class="add">Add</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">👕</div>
+        <div class="body">
+          <h3>Grin Tee</h3>
+          <p class="desc">Heavyweight cotton, embroidered red seal.</p>
+          <div class="meta"><span class="price">$34</span><button class="add">Add</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">📓</div>
+        <div class="body">
+          <h3>Ink Notebook</h3>
+          <p class="desc">Dot grid, lay-flat binding, 192 pages.</p>
+          <div class="meta"><span class="price">$16</span><button class="add">Add</button></div>
+        </div>
+      </a>
+      <a class="card" href="#">
+        <div class="thumb">🧢</div>
+        <div class="body">
+          <h3>Panda Cap</h3>
+          <p class="desc">Structured twill, one size, very good ears.</p>
+          <div class="meta"><span class="price">$27</span><button class="add">Add</button></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto" id="rules">
+  <div class="wrap">
+    <div>
+      <h2>The Panda <span class="red">Manifesto</span></h2>
+      <p>We're a two-person studio, not a megamall. We make fewer things and make them properly — objects you'll still be using, wearing, and smiling at years from now.</p>
+      <p>No seasonal landfill. No 400 variants. Just black, white, and one honest red stamp when a piece earns it.</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><span class="n">01</span><p>Two colours. If it needs a third, it isn't finished.</p></div>
+      <div class="rule"><span class="n">02</span><p>Four products at a time. Quality has a headcount.</p></div>
+      <div class="rule"><span class="n">03</span><p>Every order stamped, checked, and packed by a human.</p></div>
+      <div class="rule"><span class="n">04</span><p>If it doesn't make you grin, return it. We'll pay the postage.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="wrap">
+    <div class="head-row">
+      <h2>Stamped &amp; approved</h2>
+      <span class="count">4.9 / 5 across 800+ orders</span>
+    </div>
+    <div class="proof-grid">
+      <div class="proof">
+        <div class="stars">★★★★★</div>
+        <p>"The mug is the best-designed object in my kitchen and it cost less than my last takeaway order."</p>
+        <div class="who">Dmitri V. — Berlin</div>
+      </div>
+      <div class="proof">
+        <div class="stars">★★★★★</div>
+        <p>"Bought the tee in March. Worn it roughly 200 times. The seal hasn't cracked. Neither has my smile."</p>
+        <div class="who">Hana O. — Osaka</div>
+      </div>
+      <div class="proof">
+        <div class="stars">★★★★★</div>
+        <p>"A shop with four products and every one of them is a 10/10. Other brands should be nervous."</p>
+        <div class="who">Sam T. — Toronto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="news">
+  <div class="wrap">
+    <h2>First dibs on the <span class="red">next drop</span></h2>
+    <p>One email a month. Restock alerts, studio notes, and 10% off your first order.</p>
+    <form class="field" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Stamped. You are on the list — code GRIN10 is on its way.');">
+      <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+      <button class="btn inverse" type="submit">Sign up</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div>
+      <h4>Smiling Panda</h4>
+      <p style="max-width:30ch;font-size:.92rem;font-weight:500;color:#3c3c38">Black, white, and one red stamp. Shipped worldwide.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="#shop">Current drop</a>
+      <a href="#shop">Restocks</a>
+      <a href="#shop">Gift cards</a>
+    </div>
+    <div>
+      <h4>Info</h4>
+      <a href="#">Shipping</a>
+      <a href="#">Returns</a>
+      <a href="#rules">Manifesto</a>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <a href="mailto:studio@smilingpanda.shop">studio@smilingpanda.shop</a>
+      <a href="#">Instagram</a>
+    </div>
+  </div>
+  <div class="copy">
+    <span>© 2026 Smiling Panda</span>
+    <span>Designed with exactly two colours (and one exception)</span>
+  </div>
+</footer>
+
+</body>
+</html>

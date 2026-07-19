@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your cart — Smiling Panda</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171130;--violet:#6C3DF4;--violet-d:#5528DB;--lime:#D9F65B;--lime-d:#C9EF33;--bone:#F7F6F0;--lav:#ECE7FF;--muted:#5B5472;--line:rgba(23,17,48,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6}
+h1,h2,h3,h4{font-family:'Unbounded',sans-serif;line-height:1.14;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:var(--lime)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+
+nav{position:sticky;top:0;z-index:60;background:rgba(247,246,240,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:auto;padding:13px 24px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem}
+.logo .tile{width:42px;height:42px;border-radius:13px;background:var(--lime);display:grid;place-items:center;flex:none}
+.logo .tile svg{width:72%}
+.links{display:flex;gap:4px;margin-left:auto;font-weight:500;font-size:.95rem}
+.links a{padding:9px 16px;border-radius:999px;transition:background .2s,color .2s}
+.links a:hover{background:var(--lav)}
+.links a.on{background:var(--ink);color:#fff}
+.cart-link{position:relative;margin-left:8px;width:44px;height:44px;border-radius:999px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:1.1rem;transition:background .2s}
+.cart-link:hover{background:var(--lav)}
+.cart-n{position:absolute;top:-4px;right:-4px;background:var(--violet);color:#fff;font-size:.68rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:grid;place-items:center;padding:0 5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.97rem;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s,background .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-lime{background:var(--lime);color:var(--ink);box-shadow:0 8px 20px rgba(201,239,51,.45)}
+.btn-lime:hover{background:var(--lime-d)}
+.btn-ghost{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--violet)}
+.full{width:100%}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--violet-d);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+.sub{color:var(--muted);max-width:60ch;font-size:1.05rem}
+.t-lav{background:var(--lav)}.t-lime{background:#F0F9CE}.t-mint{background:#DFF3E9}.t-blush{background:#FCE8EF}
+
+.input{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font:inherit;color:var(--ink)}
+.input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(108,61,244,.14)}
+
+footer{background:var(--ink);color:#CFC9E8;margin-top:80px}
+.f-in{max-width:1180px;margin:auto;padding:56px 24px 26px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+footer h4{font-family:'Unbounded',sans-serif;font-size:.82rem;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+footer a{display:block;padding:4px 0;font-size:.92rem;opacity:.85;transition:.2s}
+footer a:hover{opacity:1;color:var(--lime)}
+.f-logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:700;color:#fff;margin-bottom:12px}
+.f-logo .tile{width:38px;height:38px;border-radius:11px;background:var(--lime);display:grid;place-items:center}
+.f-logo .tile svg{width:72%}
+.f-bar{max-width:1180px;margin:auto;padding:20px 24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.83rem;opacity:.7}
+
+/* ---------- page: cart ---------- */
+.cart-head{padding:56px 0 4px}
+.cart-head h1{font-size:clamp(2rem,4.4vw,3rem);margin:16px 0 10px}
+.cart-wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:32px;align-items:start;padding:34px 0 20px}
+.items{display:grid;gap:16px}
+.item{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;display:grid;grid-template-columns:86px 1fr auto auto auto;gap:16px;align-items:center}
+.ph2{width:86px;height:86px;border-radius:16px;display:grid;place-items:center;font-size:2.2rem}
+.it h3{font-size:.95rem}
+.it .cat{font-size:.8rem;color:var(--muted);font-weight:500}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:999px;background:#fff}
+.qty button{width:40px;height:42px;border:none;background:none;font-size:1.15rem;cursor:pointer;color:var(--ink);border-radius:999px;transition:background .15s}
+.qty button:hover{background:var(--lav)}
+.qty .qv{min-width:30px;text-align:center;font-weight:700}
+.line{font-family:'Unbounded',sans-serif;font-weight:700;font-size:.95rem;min-width:64px;text-align:right}
+.rm{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;width:36px;height:36px;border-radius:50%;transition:.15s}
+.rm:hover{background:#FCE8EF;color:#D6336C}
+.keep{margin-top:18px;display:inline-flex}
+
+.sum{background:#fff;border:1px solid var(--line);border-radius:26px;padding:28px;position:sticky;top:92px}
+.sum h2{font-size:1.05rem;margin-bottom:14px}
+.srow{display:flex;justify-content:space-between;font-size:.95rem;padding:7px 0;color:var(--muted);font-weight:500}
+.srow.total{border-top:1.5px solid var(--line);margin-top:10px;padding-top:16px;color:var(--ink);font-weight:700;font-size:1.02rem}
+.srow.total .amt{font-family:'Unbounded',sans-serif}
+.ship-note{background:var(--lav);border-radius:14px;padding:12px 14px;font-size:.85rem;font-weight:600;color:var(--violet-d);margin:14px 0 4px}
+.bar{height:8px;background:var(--bone);border-radius:99px;overflow:hidden;margin-top:9px;border:1px solid var(--line)}
+.bar i{display:block;height:100%;background:var(--violet);border-radius:99px;transition:width .3s;width:0}
+.promo{display:flex;gap:8px;margin:16px 0}
+.promo .input{flex:1}
+.promo .btn{padding:12px 18px}
+.trust{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.trust span{font-size:.78rem;background:var(--bone);border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-weight:500}
+
+.empty{display:none;text-align:center;padding:70px 24px;background:#fff;border:1.5px dashed var(--line);border-radius:26px;margin:34px 0 20px}
+.empty .big{font-size:3rem;margin-bottom:12px}
+.empty h2{font-size:1.2rem;margin-bottom:8px}
+.empty p{color:var(--muted);margin-bottom:22px}
+
+@media(max-width:960px){
+  .links{display:none}
+  .cart-wrap{grid-template-columns:1fr}
+  .sum{position:static}
+  .f-in{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .item{grid-template-columns:70px 1fr auto;grid-template-areas:"img t rm" "img q l"}
+  .ph2{grid-area:img;width:70px;height:70px;font-size:1.8rem}
+  .it{grid-area:t}
+  .qty{grid-area:q;justify-self:start}
+  .line{grid-area:l;justify-self:end}
+  .rm{grid-area:rm;justify-self:end}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <span class="tile">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+          <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+          <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+          <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+          <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+          <circle cx="47.5" cy="55" r="3" fill="#F7F6F0"/><circle cx="72.5" cy="55" r="3" fill="#F7F6F0"/>
+          <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+          <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      Smiling Panda
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="cart.html" class="cart-link" aria-label="Cart">🛒<span class="cart-n" id="cartN">0</span></a>
+  </div>
+</nav>
+
+<header class="cart-head">
+  <div class="wrap">
+    <span class="eyebrow">Your cart</span>
+    <h1>Almost yours 🛒</h1>
+    <p class="sub">Review your picks below — quantities update the total instantly.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="cart-wrap" id="cartWrap">
+      <div>
+        <div class="items" id="items">
+          <div class="item" data-price="21">
+            <div class="ph2 t-lav">☕</div>
+            <div class="it">
+              <h3>Cloud Mug</h3>
+              <span class="cat">Drinkware · Bone</span>
+            </div>
+            <div class="qty" aria-label="Quantity">
+              <button class="qm" aria-label="Decrease quantity">−</button>
+              <span class="qv">1</span>
+              <button class="qp" aria-label="Increase quantity">+</button>
+            </div>
+            <span class="line">$21</span>
+            <button class="rm" aria-label="Remove Cloud Mug">✕</button>
+          </div>
+
+          <div class="item" data-price="19">
+            <div class="ph2 t-mint">🍵</div>
+            <div class="it">
+              <h3>Bamboo Calm Tea</h3>
+              <span class="cat">Drinkware · 20 servings</span>
+            </div>
+            <div class="qty" aria-label="Quantity">
+              <button class="qm" aria-label="Decrease quantity">−</button>
+              <span class="qv">2</span>
+              <button class="qp" aria-label="Increase quantity">+</button>
+            </div>
+            <span class="line">$38</span>
+            <button class="rm" aria-label="Remove Bamboo Calm Tea">✕</button>
+          </div>
+
+          <div class="item" data-price="18">
+            <div class="ph2 t-blush">🧸</div>
+            <div class="it">
+              <h3>Mochi Plush</h3>
+              <span class="cat">Plushies · Pocket size</span>
+            </div>
+            <div class="qty" aria-label="Quantity">
+              <button class="qm" aria-label="Decrease quantity">−</button>
+              <span class="qv">1</span>
+              <button class="qp" aria-label="Increase quantity">+</button>
+            </div>
+            <span class="line">$18</span>
+            <button class="rm" aria-label="Remove Mochi Plush">✕</button>
+          </div>
+        </div>
+        <a href="shop.html" class="btn btn-ghost keep">← Keep shopping</a>
+      </div>
+
+      <aside class="sum">
+        <h2>Order summary</h2>
+        <div class="srow"><span>Subtotal (<span id="nItems">0</span> items)</span><span id="sub">$0.00</span></div>
+        <div class="srow"><span>Shipping</span><span id="ship">—</span></div>
+        <div class="srow total"><span>Total</span><span class="amt" id="total">$0.00</span></div>
+        <div class="ship-note" id="note">
+          <span id="noteTxt"></span>
+          <div class="bar"><i id="bar"></i></div>
+        </div>
+        <div class="promo">
+          <input class="input" id="promo" placeholder="Promo code" aria-label="Promo code">
+          <button class="btn btn-ghost" id="apply">Apply</button>
+        </div>
+        <button class="btn btn-lime full" id="checkout">Checkout securely →</button>
+        <div class="trust">
+          <span>🔒 Secure checkout</span>
+          <span>↩️ 30-day returns</span>
+          <span>🎁 Free gift wrap</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="empty" id="empty">
+      <div class="big">🐼</div>
+      <h2>Your cart is feeling light</h2>
+      <p>Nothing in here yet — let's fix that.</p>
+      <a href="shop.html" class="btn btn-dark">Browse the shop</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="f-in">
+    <div>
+      <div class="f-logo">
+        <span class="tile">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+            <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+            <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+            <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+            <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+            <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Smiling Panda
+      </div>
+      <p style="font-size:.92rem;max-width:30ch">Everyday things that make you smile — designed, packed and shipped with care.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="shop.html">All products</a>
+      <a href="shop.html">Bestsellers</a>
+      <a href="cart.html">Your cart</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About us</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="contact.html#faq">Shipping</a>
+      <a href="contact.html#faq">Returns</a>
+      <a href="mailto:hello@smilingpanda.shop">hello@smilingpanda.shop</a>
+    </div>
+  </div>
+  <div class="f-bar">
+    <span>© 2026 Smiling Panda</span>
+    <span>Made with 🎋 and a lot of tea</span>
+  </div>
+</footer>
+
+<script>
+const FREE=40, SHIP=4.5;
+const cartN=document.getElementById('cartN');
+const subEl=document.getElementById('sub'),shipEl=document.getElementById('ship'),
+      totalEl=document.getElementById('total'),nItems=document.getElementById('nItems'),
+      noteTxt=document.getElementById('noteTxt'),bar=document.getElementById('bar');
+
+function recalc(){
+  let sub=0,q=0;
+  document.querySelectorAll('.item').forEach(it=>{
+    const p=+it.dataset.price, n=+it.querySelector('.qv').textContent;
+    sub+=p*n; q+=n;
+    it.querySelector('.line').textContent='$'+(p*n);
+  });
+  const ship=(sub===0||sub>=FREE)?0:SHIP;
+  subEl.textContent='$'+sub.toFixed(2);
+  shipEl.textContent=ship===0?'Free':'$'+ship.toFixed(2);
+  totalEl.textContent='$'+(sub+ship).toFixed(2);
+  nItems.textContent=q;
+  cartN.textContent=q;
+  if(sub>=FREE){
+    noteTxt.textContent='🎉 Free shipping unlocked!';
+    bar.style.width='100%';
+  }else{
+    noteTxt.textContent=`Add $${(FREE-sub).toFixed(2)} more for free shipping`;
+    bar.style.width=Math.min(100,sub/FREE*100)+'%';
+  }
+  const emptyNow=q===0;
+  document.getElementById('cartWrap').style.display=emptyNow?'none':'';
+  document.getElementById('empty').style.display=emptyNow?'block':'none';
+}
+
+document.getElementById('items').addEventListener('click',e=>{
+  const item=e.target.closest('.item');
+  if(!item)return;
+  const qv=item.querySelector('.qv');
+  if(e.target.classList.contains('qp'))qv.textContent=Math.min(9,+qv.textContent+1);
+  if(e.target.classList.contains('qm'))qv.textContent=Math.max(1,+qv.textContent-1);
+  if(e.target.classList.contains('rm'))item.remove();
+  recalc();
+});
+
+document.getElementById('apply').onclick=()=>{
+  const v=document.getElementById('promo').value.trim();
+  alert(v?`Demo only — the code "${v}" will work once real checkout is connected 🐼`:'Enter a code first 🙂');
+};
+document.getElementById('checkout').onclick=()=>alert('This is a design mockup — your payment provider (Stripe, SSLCommerz, bKash, etc.) would plug in here!');
+
+recalc();
+</script>
+</body>
+</html>

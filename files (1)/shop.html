@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Smiling Panda</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171130;--violet:#6C3DF4;--violet-d:#5528DB;--lime:#D9F65B;--lime-d:#C9EF33;--bone:#F7F6F0;--lav:#ECE7FF;--muted:#5B5472;--line:rgba(23,17,48,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6}
+h1,h2,h3,h4{font-family:'Unbounded',sans-serif;line-height:1.14;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:var(--lime)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+
+nav{position:sticky;top:0;z-index:60;background:rgba(247,246,240,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:auto;padding:13px 24px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem}
+.logo .tile{width:42px;height:42px;border-radius:13px;background:var(--lime);display:grid;place-items:center;flex:none}
+.logo .tile svg{width:72%}
+.links{display:flex;gap:4px;margin-left:auto;font-weight:500;font-size:.95rem}
+.links a{padding:9px 16px;border-radius:999px;transition:background .2s,color .2s}
+.links a:hover{background:var(--lav)}
+.links a.on{background:var(--ink);color:#fff}
+.cart-link{position:relative;margin-left:8px;width:44px;height:44px;border-radius:999px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:1.1rem;transition:background .2s}
+.cart-link:hover{background:var(--lav)}
+.cart-n{position:absolute;top:-4px;right:-4px;background:var(--violet);color:#fff;font-size:.68rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:grid;place-items:center;padding:0 5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.97rem;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s,background .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-violet{background:var(--violet);color:#fff;box-shadow:0 8px 20px rgba(108,61,244,.3)}
+.btn-violet:hover{background:var(--violet-d)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--violet-d);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+.sub{color:var(--muted);max-width:60ch;font-size:1.05rem}
+
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .22s,box-shadow .22s,border-color .22s}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(23,17,48,.12);border-color:transparent}
+.ph{aspect-ratio:1;display:grid;place-items:center;font-size:4rem}
+.t-lav{background:var(--lav)}.t-lime{background:#F0F9CE}.t-mint{background:#DFF3E9}.t-blush{background:#FCE8EF}
+.pb{padding:18px 20px 20px;display:flex;flex-direction:column;gap:3px;flex:1}
+.pb h3{font-size:.95rem}
+.pb .cat{font-size:.8rem;color:var(--muted);font-weight:500}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-family:'Unbounded',sans-serif;font-weight:700;font-size:.95rem}
+.add{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:9px 16px;font-weight:600;font-size:.83rem;cursor:pointer;transition:background .18s}
+.add:hover{background:var(--violet)}
+.add:disabled{background:var(--violet);cursor:default}
+.badge{position:absolute;top:14px;left:14px;background:var(--ink);color:var(--lime);font-size:.7rem;font-weight:700;letter-spacing:.07em;padding:6px 12px;border-radius:999px;z-index:2}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+footer{background:var(--ink);color:#CFC9E8;margin-top:80px}
+.f-in{max-width:1180px;margin:auto;padding:56px 24px 26px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+footer h4{font-family:'Unbounded',sans-serif;font-size:.82rem;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+footer a{display:block;padding:4px 0;font-size:.92rem;opacity:.85;transition:.2s}
+footer a:hover{opacity:1;color:var(--lime)}
+.f-logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:700;color:#fff;margin-bottom:12px}
+.f-logo .tile{width:38px;height:38px;border-radius:11px;background:var(--lime);display:grid;place-items:center}
+.f-logo .tile svg{width:72%}
+.f-bar{max-width:1180px;margin:auto;padding:20px 24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.83rem;opacity:.7}
+
+/* ---------- page: shop ---------- */
+.shop-head{padding:60px 0 0}
+.shop-head h1{font-size:clamp(2rem,4.4vw,3rem);margin:16px 0 12px}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:30px 0 26px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{padding:10px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:.9rem;cursor:pointer;transition:.18s}
+.chip:hover{border-color:var(--violet);color:var(--violet-d)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.count{color:var(--muted);font-size:.9rem;font-weight:500}
+.shop-body{padding-bottom:20px}
+
+@media(max-width:960px){
+  .links{display:none}
+  .pgrid{grid-template-columns:1fr 1fr}
+  .f-in{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){.pgrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <span class="tile">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+          <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+          <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+          <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+          <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+          <circle cx="47.5" cy="55" r="3" fill="#F7F6F0"/><circle cx="72.5" cy="55" r="3" fill="#F7F6F0"/>
+          <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+          <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      Smiling Panda
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="on">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="cart.html" class="cart-link" aria-label="Cart">🛒<span class="cart-n" id="cartN">0</span></a>
+  </div>
+</nav>
+
+<header class="shop-head">
+  <div class="wrap">
+    <span class="eyebrow">The full shop</span>
+    <h1>Everything, in one happy place</h1>
+    <p class="sub">Eight little joys, restocked monthly. Filter by category or browse the lot.</p>
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Filter products by category">
+        <button class="chip on" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" data-f="drinkware" aria-pressed="false">☕ Drinkware</button>
+        <button class="chip" data-f="stationery" aria-pressed="false">📓 Stationery</button>
+        <button class="chip" data-f="plush" aria-pressed="false">🧸 Plushies</button>
+        <button class="chip" data-f="wear" aria-pressed="false">🧢 Wearables</button>
+      </div>
+      <span class="count" id="count">Showing 8 products</span>
+    </div>
+  </div>
+</header>
+
+<main class="shop-body">
+  <div class="wrap">
+    <div class="pgrid" id="grid">
+      <a class="pcard" href="product.html" data-cat="drinkware">
+        <span class="badge">BESTSELLER</span>
+        <div class="ph t-lav">☕</div>
+        <div class="pb">
+          <span class="cat">Drinkware</span>
+          <h3>Cloud Mug</h3>
+          <div class="prow"><span class="price">$21</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="drinkware">
+        <div class="ph t-mint">🍵</div>
+        <div class="pb">
+          <span class="cat">Drinkware</span>
+          <h3>Bamboo Calm Tea</h3>
+          <div class="prow"><span class="price">$19</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="stationery">
+        <div class="ph t-lime">📓</div>
+        <div class="pb">
+          <span class="cat">Stationery</span>
+          <h3>Grin Notebook</h3>
+          <div class="prow"><span class="price">$14</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="stationery">
+        <div class="ph t-blush">✏️</div>
+        <div class="pb">
+          <span class="cat">Stationery</span>
+          <h3>Doodle Pen Set</h3>
+          <div class="prow"><span class="price">$12</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="plush">
+        <span class="badge">BESTSELLER</span>
+        <div class="ph t-blush">🧸</div>
+        <div class="pb">
+          <span class="cat">Plushies</span>
+          <h3>Mochi Plush</h3>
+          <div class="prow"><span class="price">$18</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="plush">
+        <span class="badge">NEW</span>
+        <div class="ph t-lav">🐼</div>
+        <div class="pb">
+          <span class="cat">Plushies</span>
+          <h3>Sleepy Panda XL</h3>
+          <div class="prow"><span class="price">$34</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="wear">
+        <div class="ph t-lime">🧢</div>
+        <div class="pb">
+          <span class="cat">Wearables</span>
+          <h3>Panda Cap</h3>
+          <div class="prow"><span class="price">$27</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+      <a class="pcard" href="product.html" data-cat="wear">
+        <div class="ph t-mint">🧦</div>
+        <div class="pb">
+          <span class="cat">Wearables</span>
+          <h3>Cozy Bamboo Socks</h3>
+          <div class="prow"><span class="price">$13</span><button class="add" onclick="event.preventDefault();addCart(this)">Add +</button></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="f-in">
+    <div>
+      <div class="f-logo">
+        <span class="tile">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+            <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+            <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+            <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+            <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+            <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Smiling Panda
+      </div>
+      <p style="font-size:.92rem;max-width:30ch">Everyday things that make you smile — designed, packed and shipped with care.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="shop.html">All products</a>
+      <a href="shop.html">Bestsellers</a>
+      <a href="cart.html">Your cart</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About us</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="contact.html#faq">Shipping</a>
+      <a href="contact.html#faq">Returns</a>
+      <a href="mailto:hello@smilingpanda.shop">hello@smilingpanda.shop</a>
+    </div>
+  </div>
+  <div class="f-bar">
+    <span>© 2026 Smiling Panda</span>
+    <span>Made with 🎋 and a lot of tea</span>
+  </div>
+</footer>
+
+<script>
+const cartN=document.getElementById('cartN');
+function addCart(b,q=1){cartN.textContent=+cartN.textContent+q;if(b){const t=b.textContent;b.disabled=true;b.textContent='✓ Added';setTimeout(()=>{b.textContent=t;b.disabled=false},1100)}}
+
+const chips=document.querySelectorAll('.chip');
+const cards=document.querySelectorAll('#grid .pcard');
+const count=document.getElementById('count');
+chips.forEach(ch=>ch.addEventListener('click',()=>{
+  chips.forEach(c=>{c.classList.remove('on');c.setAttribute('aria-pressed','false')});
+  ch.classList.add('on');ch.setAttribute('aria-pressed','true');
+  const f=ch.dataset.f;let n=0;
+  cards.forEach(card=>{
+    const show=(f==='all'||card.dataset.cat===f);
+    card.style.display=show?'':'none';
+    if(show)n++;
+  });
+  count.textContent=`Showing ${n} product${n===1?'':'s'}`;
+}));
+</script>
+</body>
+</html>

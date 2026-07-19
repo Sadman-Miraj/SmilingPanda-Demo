@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Smiling Panda</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171130;--violet:#6C3DF4;--violet-d:#5528DB;--lime:#D9F65B;--lime-d:#C9EF33;--bone:#F7F6F0;--lav:#ECE7FF;--muted:#5B5472;--line:rgba(23,17,48,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--bone);color:var(--ink);line-height:1.6}
+h1,h2,h3,h4{font-family:'Unbounded',sans-serif;line-height:1.14;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:inherit}
+::selection{background:var(--lime)}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:auto;padding:0 24px}
+
+nav{position:sticky;top:0;z-index:60;background:rgba(247,246,240,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:auto;padding:13px 24px;display:flex;align-items:center;gap:18px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Unbounded',sans-serif;font-weight:700;font-size:1rem}
+.logo .tile{width:42px;height:42px;border-radius:13px;background:var(--lime);display:grid;place-items:center;flex:none}
+.logo .tile svg{width:72%}
+.links{display:flex;gap:4px;margin-left:auto;font-weight:500;font-size:.95rem}
+.links a{padding:9px 16px;border-radius:999px;transition:background .2s,color .2s}
+.links a:hover{background:var(--lav)}
+.links a.on{background:var(--ink);color:#fff}
+.cart-link{position:relative;margin-left:8px;width:44px;height:44px;border-radius:999px;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:1.1rem;transition:background .2s}
+.cart-link:hover{background:var(--lav)}
+.cart-n{position:absolute;top:-4px;right:-4px;background:var(--violet);color:#fff;font-size:.68rem;font-weight:700;min-width:20px;height:20px;border-radius:999px;display:grid;place-items:center;padding:0 5px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.97rem;padding:14px 26px;border-radius:999px;border:none;cursor:pointer;transition:transform .18s,background .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px)}
+.btn-violet{background:var(--violet);color:#fff;box-shadow:0 8px 20px rgba(108,61,244,.3)}
+.btn-violet:hover{background:var(--violet-d)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--violet-d);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:8px 16px;border-radius:999px}
+.h2{font-size:clamp(1.6rem,3.2vw,2.2rem);margin:16px 0 12px}
+.sub{color:var(--muted);max-width:60ch;font-size:1.05rem}
+.center{text-align:center}
+.center .sub{margin-inline:auto}
+
+.input{width:100%;padding:14px 18px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font:inherit;color:var(--ink)}
+.input:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(108,61,244,.14)}
+label{font-weight:600;font-size:.9rem;display:block;margin-bottom:7px}
+
+footer{background:var(--ink);color:#CFC9E8;margin-top:80px}
+.f-in{max-width:1180px;margin:auto;padding:56px 24px 26px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
+footer h4{font-family:'Unbounded',sans-serif;font-size:.82rem;color:#fff;margin-bottom:14px;letter-spacing:.04em}
+footer a{display:block;padding:4px 0;font-size:.92rem;opacity:.85;transition:.2s}
+footer a:hover{opacity:1;color:var(--lime)}
+.f-logo{display:flex;align-items:center;gap:10px;font-family:'Unbounded',sans-serif;font-weight:700;color:#fff;margin-bottom:12px}
+.f-logo .tile{width:38px;height:38px;border-radius:11px;background:var(--lime);display:grid;place-items:center}
+.f-logo .tile svg{width:72%}
+.f-bar{max-width:1180px;margin:auto;padding:20px 24px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.83rem;opacity:.7}
+
+/* ---------- page: contact ---------- */
+.chero{padding:60px 0 6px}
+.chero h1{font-size:clamp(2rem,4.4vw,3rem);margin:16px 0 12px}
+.cgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:start;padding:36px 0 10px}
+.formcard{background:#fff;border:1px solid var(--line);border-radius:28px;padding:34px}
+.formcard h2{font-size:1.15rem;margin-bottom:20px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fgroup{margin-bottom:16px}
+textarea.input{min-height:132px;resize:vertical}
+select.input{cursor:pointer}
+.ok{display:none;background:var(--lav);border:1.5px solid var(--violet);color:var(--violet-d);border-radius:16px;padding:14px 18px;font-weight:600;margin-bottom:16px}
+
+.icard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;display:flex;gap:16px;margin-bottom:14px}
+.icard .ic{width:50px;height:50px;border-radius:16px;background:var(--lav);display:grid;place-items:center;font-size:1.3rem;flex:none}
+.icard h3{font-size:.95rem;margin-bottom:3px}
+.icard p,.icard a{font-size:.9rem;color:var(--muted);display:block}
+.icard a:hover{color:var(--violet-d)}
+
+#faq{padding:70px 0 10px}
+details{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 24px;margin-bottom:12px;transition:border-color .2s}
+details[open]{border-color:var(--violet)}
+summary{font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:'Unbounded',sans-serif;color:var(--violet);font-size:1.15rem;transition:transform .2s;flex:none}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin-top:12px;color:var(--muted);font-size:.95rem;max-width:66ch}
+
+@media(max-width:960px){
+  .links{display:none}
+  .cgrid{grid-template-columns:1fr}
+  .f-in{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){.frow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="logo">
+      <span class="tile">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Smiling Panda logo">
+          <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+          <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+          <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+          <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+          <circle cx="47.5" cy="55" r="3" fill="#F7F6F0"/><circle cx="72.5" cy="55" r="3" fill="#F7F6F0"/>
+          <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+          <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      Smiling Panda
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="on">Contact</a>
+    </div>
+    <a href="cart.html" class="cart-link" aria-label="Cart">🛒<span class="cart-n" id="cartN">0</span></a>
+  </div>
+</nav>
+
+<header class="chero">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h1>Say hello 👋</h1>
+    <p class="sub">Question about an order, a product, or just want to send us a panda meme? All are welcome. We reply within one business day.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="cgrid">
+      <div class="formcard">
+        <h2>Send us a message</h2>
+        <div class="ok" id="ok" role="status">✓ Message sent! We'll get back to you within one business day.</div>
+        <form id="cform">
+          <div class="frow">
+            <div class="fgroup">
+              <label for="name">Your name</label>
+              <input class="input" id="name" type="text" placeholder="Panda Fan" required>
+            </div>
+            <div class="fgroup">
+              <label for="email">Email</label>
+              <input class="input" id="email" type="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="fgroup">
+            <label for="topic">What's it about?</label>
+            <select class="input" id="topic">
+              <option>Order question</option>
+              <option>Shipping</option>
+              <option>Returns &amp; refunds</option>
+              <option>Wholesale enquiry</option>
+              <option>Just saying hi</option>
+            </select>
+          </div>
+          <div class="fgroup">
+            <label for="msg">Message</label>
+            <textarea class="input" id="msg" placeholder="Tell us everything… include your order number (#SP-XXXX) if it's about an order." required></textarea>
+          </div>
+          <button class="btn btn-violet" type="submit">Send message</button>
+        </form>
+      </div>
+
+      <aside>
+        <div class="icard">
+          <span class="ic">📧</span>
+          <div>
+            <h3>Email us</h3>
+            <a href="mailto:hello@smilingpanda.shop">hello@smilingpanda.shop</a>
+            <p>Fastest way to reach us — replies within 24h on weekdays.</p>
+          </div>
+        </div>
+        <div class="icard">
+          <span class="ic">🕐</span>
+          <div>
+            <h3>Studio hours</h3>
+            <p>Monday–Saturday, 9am–6pm</p>
+            <p>Orders ship every working day.</p>
+          </div>
+        </div>
+        <div class="icard">
+          <span class="ic">📦</span>
+          <div>
+            <h3>Order help</h3>
+            <p>Include your order number (#SP-XXXX) so we can find it instantly.</p>
+          </div>
+        </div>
+        <div class="icard">
+          <span class="ic">💬</span>
+          <div>
+            <h3>Find us online</h3>
+            <a href="#">Instagram — @smilingpanda</a>
+            <a href="#">TikTok — @smilingpanda</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section id="faq">
+      <div class="center">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h2">Quick answers</h2>
+        <p class="sub">The five questions we get asked the most.</p>
+      </div>
+      <div style="max-width:760px;margin:36px auto 0">
+        <details>
+          <summary>How long does shipping take?</summary>
+          <p>Orders placed before 3pm ship the same working day. Standard delivery takes 2–4 business days locally, and 5–10 business days internationally. You'll get a tracking link the moment your parcel leaves the studio.</p>
+        </details>
+        <details>
+          <summary>When is shipping free?</summary>
+          <p>Every order over $40 ships free, automatically — no code needed. Under $40, standard shipping is a flat $4.50.</p>
+        </details>
+        <details>
+          <summary>What's your return policy?</summary>
+          <p>You have 30 days from delivery to return anything, in any condition, for a full refund. We cover the return postage, and there are no forms or awkward questions — we call it the Smile Guarantee.</p>
+        </details>
+        <details>
+          <summary>Is gift wrapping really free?</summary>
+          <p>Yes! Every order arrives wrapped in tissue paper with a ribbon and a handwritten note. Ordering a gift? Leave a message at checkout and we'll write it on the card for you.</p>
+        </details>
+        <details>
+          <summary>Do you do wholesale?</summary>
+          <p>We love working with small shops and cafés. Email hello@smilingpanda.shop with "Wholesale" in the subject and a little about your store, and we'll send over our line sheet.</p>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="f-in">
+    <div>
+      <div class="f-logo">
+        <span class="tile">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="34" cy="30" r="15" fill="#171130"/><circle cx="86" cy="30" r="15" fill="#171130"/>
+            <circle cx="60" cy="66" r="38" fill="#F7F6F0"/>
+            <ellipse cx="46" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(-14 46 58)"/>
+            <ellipse cx="74" cy="58" rx="9" ry="12" fill="#171130" transform="rotate(14 74 58)"/>
+            <ellipse cx="60" cy="73" rx="5.5" ry="4" fill="#171130"/>
+            <path d="M51 82 Q60 91 69 82" stroke="#171130" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Smiling Panda
+      </div>
+      <p style="font-size:.92rem;max-width:30ch">Everyday things that make you smile — designed, packed and shipped with care.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <a href="shop.html">All products</a>
+      <a href="shop.html">Bestsellers</a>
+      <a href="cart.html">Your cart</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About us</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html#faq">FAQ</a>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <a href="contact.html#faq">Shipping</a>
+      <a href="contact.html#faq">Returns</a>
+      <a href="mailto:hello@smilingpanda.shop">hello@smilingpanda.shop</a>
+    </div>
+  </div>
+  <div class="f-bar">
+    <span>© 2026 Smiling Panda</span>
+    <span>Made with 🎋 and a lot of tea</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('cform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const ok=document.getElementById('ok');
+  ok.style.display='block';
+  e.target.reset();
+  ok.scrollIntoView({behavior:'smooth',block:'center'});
+});
+</script>
+</body>
+</html>
